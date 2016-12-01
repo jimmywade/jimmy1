@@ -316,7 +316,7 @@
                 </div>
                 <div class="row" style="background-color:#FFF; margin-top:1em;">
                     <div class="col-xs-6">
-                        <h3>Institucion educativa:</h3>
+                        <h3>Instituci&oacute;n educativa:</h3>
                     </div>
                     <div class="col-xs-6">
                         <br>{{m.nombreInstitucion}}

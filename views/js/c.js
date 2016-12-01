@@ -86,3 +86,4 @@ function last(){
 function irA(dir){ 
     location.href = dir; 
 }  
+

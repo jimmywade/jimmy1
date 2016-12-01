@@ -159,14 +159,6 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
 
 
 
-
-
-
-
-
-
-
-
     /*
     // for multiple files:
     $scope.uploadFiles = function (files) {
@@ -217,6 +209,7 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
     $scope.setDefaultValues=function(){
         $scope.errorLogin = "";
         $scope.aviso3 ="";
+        $scope.student="";
     }
 
 
@@ -267,8 +260,8 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
 
 
     //OJO siempre inicia sesion
-    //$scope.emailEstudiante = 'mila@gmail.com';
-    //$scope.passwordEstudiante = '123';
+    $scope.emailEstudiante = 'eudes@gmail.com';
+    $scope.passwordEstudiante = '123';
 
 
 
@@ -285,40 +278,43 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
                     'emailEstudiante':$scope.emailEstudiante,
                     'passwordEstudiante':$scope.passwordEstudiante
             })
-            .success(function(data,status,headers,config){ 
-                console.log(data);
-                $scope.estudianteRead = data;
+            .success(function(datos,status,headers,config){ 
+                console.log(datos);
+                $scope.estudianteRead = datos;
 
-
-                //load todos los proyectos
-                $scope.listado = [];
-                $http.get("../control/proyectoRead.php")
-                    .success(function(data,status,headers,config){
-                        console.log(data);
-                        $scope.listado = data;
-                        
-                        if(($scope.listado!=undefined)&&($scope.listado!='')&&($scope.listado!='[]')&&($scope.listado!='{}')){
-                            on_off('estudianteRead','proyectosRead');
-                        }else{
-                            $scope.errorLogin = "No fue posible iniciar sesion ... intente nuevamente";
-                            var fa = document.getElementById("mensajeAviso");
-                            fa.style.display = "block";
-                            var borde = document.getElementById("bordeAviso");
-                            borde.style.border = "solid 2px red";
-                        }
-                    })
-                    .error(function(err){
-
-                    });
+                //setear el estudiante
+                $scope.student = $scope.estudianteRead[0].codigoEstudiante;
+                $scope.success = $scope.estudianteRead[0].success;
+                console.log('-------------------------');
+                console.log($scope.student);
+                
+                //validar si success es true
+                if(($scope.student!=undefined)&&($scope.student!="")&&($scope.success==1)){
+                    //load todos los proyectos
+                    $scope.listado = [];
+                    $http.get("../control/proyectoRead.php")
+                        .success(function(data,status,headers,config){
+                            console.log(data);
+                            $scope.listado = data;
+                            
+                            if(($scope.listado!=undefined)&&($scope.listado!='')&&($scope.listado!='[]')&&($scope.listado!='{}')){
+                                on_off('estudianteRead','proyectosRead');
+                            }else{
+                                $scope.loginFailed();
+                            }
+                        })
+                        .error(function(err){
+                            console.log('no se pudo consultar');
+                        });
+                }else{
+                    $scope.loginFailed();
+                }
+                 
 
             }); 
 
         }else{
-            $scope.errorLogin = "Oops! ...parece que faltan datos importantes";
-            var fa = document.getElementById("mensajeAviso");
-            fa.style.display = "block";
-            var borde = document.getElementById("bordeAviso");
-            borde.style.border = "solid 2px red";
+            $scope.loginFailed();
         }
         
     }
@@ -327,7 +323,18 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
 
 
 
+    $scope.loginFailed=function(){
+        $scope.errorLogin = "Oops! ...parece que faltan datos importantes";
+        var fa = document.getElementById("mensajeAviso");
+        fa.style.display = "block";
+        var borde = document.getElementById("bordeAviso");
+        borde.style.border = "solid 2px red";
+    }
 
+
+
+
+    
     $scope.proyectosLoad=function(hhh,sss){
 
         $http.get("../control/proyectoRead.php")
