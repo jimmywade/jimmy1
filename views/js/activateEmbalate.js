@@ -228,14 +228,6 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
 
 
 
-    //setear el estudiante
-    $scope.setEstudiante=function(student){
-       var student = student;
-       $scope.student = student;
-       localStorage.setItem('student', student);
-       valor = localStorage.getItem('student');
-    }
-
 
 
 
@@ -302,6 +294,13 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
                                 on('mainMenu');
                                 $scope.h1 = "Listado de proyectos";
                                 $scope.divActive = "proyectosRead";
+                                //alert($scope.listado.codigoEstudiante);
+                                //console.log('...........................');
+                                //console.log($scope.listado.codigoEstudiante);
+                                //console.log('...........................');
+                                //codigo edtudiante con proyectos activos
+                                //est-201611162017372571
+
 
                             }else{
                                 $scope.loginFailed();
@@ -327,6 +326,19 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
 
 
 
+
+    //setear el estudiante
+    $scope.setEstudiante=function(student){
+       var student = student;
+       $scope.student = student;
+       localStorage.setItem('student', student);
+       valor = localStorage.getItem('student');
+    }
+
+
+
+
+
     $scope.loginFailed=function(){
         $scope.errorLogin = "Oops! ...parece que faltan datos importantes";
         var fa = document.getElementById("mensajeAviso");
@@ -334,6 +346,38 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
         var borde = document.getElementById("bordeAviso");
         borde.style.border = "solid 2px red";
     }
+
+
+
+
+
+    //consultar datos perfil este estudiante
+    $scope.myProfile=function(hide,show){
+        var whine = whine;         
+        var kotch = kotch;
+        $scope.esteToken = localStorage.getItem('student');    
+        $scope.myprofi = [];
+
+        $http.post("../control/myprofiRead.php",{'esteToken':$scope.esteToken})
+            .success(function(data,status,headers,config){
+                console.log(data);
+                $scope.myprofi = data;
+                
+                if(($scope.myprofi!=undefined)&&($scope.myprofi!='')&&($scope.myprofi!='[]')&&($scope.myprofi!='{}')){
+                    off(hide);
+                    on(show);
+                }
+            })
+            .error(function(err){
+                console.log('no fue posible consultar este perfil');
+            });
+
+    }
+
+
+
+
+
 
 
 
@@ -364,18 +408,7 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
     
 
 
-    //turn off current , turn on main
-    $scope.show=function(este,main){
-        var este= este;
-        var main = main;
-        off(este);
-        on(main);
-        off('menuLayout');
-        off('menuLayout2');
-        off('menuLayout3');
-        off('menuLayout4');
-        off('menuLayout10');
-    }
+
 
 
 
@@ -501,6 +534,31 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
 
 
 
+/*
+
+    //mis proyectos
+    $scope.misProyectos=function(hide,show){
+   
+        $scope.misproyec = [];
+
+        $scope.esteEstudiante = localStorage.getItem('student');
+
+        $http.post("../control/misproRead.php", {'esteEstudiante':$scope.esteEstudiante})
+            .success(function(data,status,headers,config){
+                console.log(data);
+                $scope.misproyec = data;
+                
+                if(($scope.mispro!=undefined)&&($scope.mispro!='')&&($scope.mispro!='[]')&&($scope.mispro!='{}')){
+                    var myVar = $scope.hs(hide,show);
+                }
+            })
+            .error(function(err){
+                console.log('no fue posible consultar mis proyectos');
+            });
+    }
+   
+*/
+
 
     //modify este proyecto
     $scope.miproyecModify=function(
@@ -603,51 +661,12 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
 
 
 
-/*
-    //delete proyect
-    $scope.misProyectos=function(hide,show){
-        //alert($scope.codigoTema);    
-        $scope.mispro = [];
-
-        $scope.esteEstudiante = localStorage.getItem('student');
-
-        $http.post("../control/misproRead.php", {'esteEstudiante':$scope.esteEstudiante})
-            .success(function(data,status,headers,config){
-                console.log(data);
-                $scope.mispro = data;
-                
-                if(($scope.mispro!=undefined)&&($scope.mispro!='')&&($scope.mispro!='[]')&&($scope.mispro!='{}')){
-                    off(hide);
-                    on(show);
-                }
-            })
-            .error(function(err){
-                console.log('no fue posible consultar mis proyectos');
-            });
-    }
-*/    
 
 
 
 
-    //reload 
-    $scope.proyectosReload=function(){
-        location.reload();
-    }
 
 
-
-
-    //reload 
-    $scope.destruirSesion=function(){
-        var student = undefined;
-        $scope.student = student;
-        localStorage.setItem('student', student);
-        valor = localStorage.getItem('student');
-        location.reload();
-    }
-
-    
 
 
     //hide and show 
@@ -675,6 +694,20 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
 
 
 
+    //turn off current , turn on main
+    $scope.show=function(este,main){
+        var este= este;
+        var main = main;
+        off(este);
+        on(main);
+        off('menuLayout');
+        off('menuLayout2');
+        off('menuLayout3');
+        off('menuLayout4');
+        off('menuLayout10');
+    }
+
+
     //turn off este
     $scope.h1=function(tituloH1){
         $scope.h1 = tituloH1;
@@ -692,28 +725,33 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
 
 
 
-    //consultar datos perfil este estudiante
-    $scope.myProfile=function(hide,show){
-        var whine = whine;         
-        var kotch = kotch;
-        $scope.esteToken = localStorage.getItem('student');    
-        $scope.myprofi = [];
 
-        $http.post("../control/myprofiRead.php",{'esteToken':$scope.esteToken})
-            .success(function(data,status,headers,config){
-                console.log(data);
-                $scope.myprofi = data;
-                
-                if(($scope.myprofi!=undefined)&&($scope.myprofi!='')&&($scope.myprofi!='[]')&&($scope.myprofi!='{}')){
-                    off(hide);
-                    on(show);
-                }
-            })
-            .error(function(err){
-                console.log('no fue posible consultar este perfil');
-            });
 
+
+
+
+
+
+
+
+    //reload 
+    $scope.proyectosReload=function(){
+        location.reload();
     }
+
+
+
+
+    //reload 
+    $scope.destruirSesion=function(){
+        var student = undefined;
+        $scope.student = student;
+        localStorage.setItem('student', student);
+        valor = localStorage.getItem('student');
+        location.reload();
+    }
+
+    
 
 
 

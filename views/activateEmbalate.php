@@ -77,10 +77,10 @@
                     <div class="col-xs-5" style="padding:0; font-size:22px;">
                         {{h1}}
                     </div>
-                    <div ng-click="hs(divActive, 'proyectosRead')" class="col-xs-2" style="padding:0;  text-align:center; ">
+                    <div ng-click="hs(divActive, 'proyectosRead'); setDivActive('proyectosRead')" class="col-xs-2" style="padding:0;  text-align:center; ">
                         <i onmouseover="this.style.color='#FFF'" onmouseout="this.style.color = '#EBEBEB'" class="fa fa-refresh fa-2x" style="text-decoration:none; color:#EBEBEB;" aria-hidden="true"></i>
                     </div>
-                    <div ng-click="myProfile( divActive,'estudianteVer' )" class="col-xs-2" style="padding:0;  text-align:center;">
+                    <div ng-click="myProfile( divActive,'estudianteVer' ); setDivActive('estudianteVer') " class="col-xs-2" style="padding:0;  text-align:center;">
                         <i onmouseover="this.style.color='#FFF'" onmouseout="this.style.color='#EBEBEB'" class="fa fa-user fa-2x" style="text-decoration:none; color:#EBEBEB;" aria-hidden="true"></i>
                     </div>
                     <div class="col-xs-2" style="padding:0;  text-align:center;">
@@ -97,7 +97,7 @@
         <div class="row">
             <div class="col-xs-3 col-xs-offset-8" style="padding:1em; background-color:#fff; box-shadow: 0px 0px 40px #666666;">
                 <div ng-click="hs(divActive, 'proyectosCreate'); hideSingle('menuLayout10'); setDivActive('proyectosCreate')" style="width:100%; padding:1em; cursor:pointer; ">Crear proyecto</div><br>
-                <div ng-click="hs(divActive,'misproyecRead'); hideSingle('menuLayout10')" style="width:100%; padding:1em; cursor:pointer; ">Mis proyectos</div><br>
+                <div ng-click="hs(divActive,'misproyecRead'); hideSingle('menuLayout10'); setDivActive('misproyecRead')" style="width:100%; padding:1em; cursor:pointer; ">Mis proyectos</div><br>
                 <div ng-click="destruirSesion(); hideSingle('menuLayout10')" style="width:100%; padding:1em; cursor:pointer; ">Cerrar sesi&oacute;n</div><br>
             </div>
         </div>
@@ -830,15 +830,19 @@
 
 
 
+
+
+
+
 <section id="misproyecRead" style="display:none;">
 
     <div>
  
         <div style="clear:both; height:9em;"></div> <!-- espacio -->
         <div class="container">
-            <div class="row" ng-repeat="mp in listado">
+            <div class="row" ng-repeat="mp in listado | filter: student">
                 <div class="col-xs-12" style="background-color:#FFF; padding:1em; border-bottom:solid 1px #d5d5d5; cursor:pointer;">
-                    <div ng-click="esteProyecto(mp.nombreImagen,mp.nombreProyecto,mp.problemaProyecto)">
+                    <div ng-click="esteProyecto($index,mp.codigoProyecto,mp.duracionProyecto); hs(divActive,'proyectosDetalle'); setDivActive('proyectosDetalle') ">
                         <div class="col-xs-2">
                             <img style="width:100%;" src="../media/proyectos/images/{{mp.nombreImagen}}">
                         </div>
