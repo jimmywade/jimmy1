@@ -73,7 +73,7 @@ Estudiantes
     // upload on file select or drop
     $scope.upload = function (file) {
         $scope.ztudent = localStorage.getItem('student');
-        alert($scope.ztudent);
+        //alert($scope.ztudent);
 
         Upload.upload({
             url: '../control/picanteUpdate.php',
@@ -363,6 +363,9 @@ Proyectos
 
 
 
+
+/*
+
     $scope.proyectosLoad=function(hhh,sss){
 
         $http.get("../control/proyectoRead.php")
@@ -383,7 +386,7 @@ Proyectos
                         console.log('cannot reach projects from db');
                     });
     }
-
+*/
 
 
 
@@ -455,9 +458,10 @@ Proyectos
 
 
 
+
     $scope.esteProyecto=function(indice,codigoProyecto,duracionProyecto){
         $scope.indice = indice;
-        alert('el indice enviado es: ' + $scope.indice);
+        //alert('el indice enviado es: ' + $scope.indice);
 
         if(duracionProyecto < 30){
             $scope.meses = 'mes';
@@ -467,6 +471,26 @@ Proyectos
         $scope.months = duracionProyecto / 30;
         
     }
+
+
+
+  
+    //proyectos read cambio
+    $scope.proyectosReadApply = function(){
+
+        setTimeout(function(){ 
+
+                        $scope.$apply(function(){   //alert('Scope indice: ' + $scope.indice);
+                                                    $scope.listado;
+                                               });
+                        },500
+                  );
+
+    }
+
+
+
+
 
 
 
@@ -528,23 +552,6 @@ Mis proyectos
 
 
 
-
-/*    
-    //ver este proyecto completo
-    $scope.proyectosDetalleApply=function(indio){
-
-        setTimeout(function(){ 
-
-                        $scope.$apply(function(){   alert('Scope indice: ' + $scope.indice);
-                                                    $scope.indice;
-                                                    $scope.listado[indice].nombreProyecto
-
-                                               });
-                        },3000
-                  );
-
-    }
-*/
 
 
 
@@ -754,7 +761,7 @@ Efectos visuales
     //turn off este
     $scope.setDivActive=function(active){
         timer7 = setTimeout(function(){ $scope.divActive = active; 
-            alert($scope.divActive); 
+            //alert($scope.divActive); 
             //console.log('-----Div activo = ------'); 
             //console.log($scope.divActive); 
         }, 300);
