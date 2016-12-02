@@ -653,7 +653,7 @@
         <div class="container" style="background-color:#FFF; padding-left:5em; padding-right:5em; padding-top:1em; padding-bottom:5em; margin-bottom:40px;">
             <div class="row">
                 <div class="col-xs-3">
-                    <img style="width:100%;" src="../media/proyectos/images/{{nombreImagen}}">
+                    <img style="width:100%;" src="../media/proyectos/images/{{listado[indice].nombreImagen}}">
                 </div>
                 <div class="col-xs-8 above"><h3 style="text-align:center;">{{listado[indice].nombreProyecto}}</h3></div>
             </div>
@@ -802,7 +802,7 @@
             <div class="row" style="clear:both; height:1em;"></div> <!-- espacio -->
             <div class="row">
                 <div class="col-xs-12">
-                    <img style="width:100%;" src="../media/proyectos/images/{{nombreImagen}}">
+                    <img style="width:100%;" src="../media/proyectos/images/{{listado[indice].nombreImagen}}">
                 </div>
             </div>
 
@@ -926,7 +926,7 @@
         <div class="container" style="background-color:#FFF; padding-left:5em; padding-right:5em; padding-top:1em; padding-bottom:5em; margin-bottom:40px;">
             <div class="row">
                 <div class="col-xs-3">
-                    <img style="width:100%;" src="../media/proyectos/images/{{nombreImagen}}">
+                    <img style="width:100%;" src="../media/proyectos/images/{{mispro[miIndice].nombreImagen}}">
                 </div>
                 <div class="col-xs-8 above"><h3 style="text-align:center;">{{mispro[miIndice].nombreProyecto}}</h3></div>
             </div>
@@ -1075,7 +1075,7 @@
             <div class="row" style="clear:both; height:1em;"></div> <!-- espacio -->
             <div class="row">
                 <div class="col-xs-12">
-                    <img style="width:100%;" src="../media/proyectos/images/{{nombreImagen}}">
+                    <img style="width:100%;" src="../media/proyectos/images/{{mispro[miIndice].nombreImagen}}">
                 </div>
             </div>
 
