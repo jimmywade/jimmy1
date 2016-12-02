@@ -80,13 +80,13 @@
                         {{h1}}
                     </div>
                     <div ng-click="hs(divActive, 'proyectosRead'); setDivActive('proyectosRead')" class="col-xs-2" style="padding:0;  text-align:center; ">
-                        <i onmouseover="this.style.color='#FFF'" onmouseout="this.style.color = '#EBEBEB'" class="fa fa-refresh fa-2x" style="text-decoration:none; color:#EBEBEB;" aria-hidden="true"></i>
+                        <i onmouseover="this.style.color='#FFF'" onmouseout="this.style.color = '#EBEBEB'" class="fa fa-paperclip fa-2x" style="text-decoration:none; color:#EBEBEB;" aria-hidden="true"></i>
                     </div>
                     <div ng-click="myProfile( divActive,'estudianteVer' ); setDivActive('estudianteVer') " class="col-xs-2" style="padding:0;  text-align:center;">
                         <i onmouseover="this.style.color='#FFF'" onmouseout="this.style.color='#EBEBEB'" class="fa fa-user fa-2x" style="text-decoration:none; color:#EBEBEB;" aria-hidden="true"></i>
                     </div>
-                    <div class="col-xs-2" style="padding:0;  text-align:center;">
-                        <i ng-click="showSingle('menuLayout10')" onmouseover="this.style.color='#FFF'" onmouseout="this.style.color='#EBEBEB'" class="fa fa-ellipsis-v fa-2x" style="text-decoration:none; color:#EBEBEB;" aria-hidden="true"></i>
+                    <div ng-click="showSingle('menuLayout10')" class="col-xs-2" style="padding:0;  text-align:center;">
+                        <i onmouseover="this.style.color='#FFF'" onmouseout="this.style.color='#EBEBEB'" class="fa fa-ellipsis-v fa-2x" style="text-decoration:none; color:#EBEBEB;" aria-hidden="true"></i>
                     </div>
                 </div>
             </div>
@@ -614,7 +614,7 @@
                         <img style="width:100%;" src="../media/proyectos/images/{{l.nombreImagen}}">
                     </div>
                     <div class="col-xs-8 col-xs-offset-1">
-                        <div class="col-xs-12" style="color:#a8a8a8; text-align:center;"><h3><b>{{l.nombreProyecto}} divActive: {{divActive}}</b></h3></div>
+                        <div class="col-xs-12" style="color:#a8a8a8; text-align:center;"><h3><b>{{l.nombreProyecto}}</b></h3></div>
                         <div class="col-xs-12">{{l.problemaProyecto | cortarTexto:250}}</div>
                     </div>
                     <div style="clear:both; height:1px;"></div> <!-- espacio -->
@@ -809,7 +809,6 @@
         </div>
 
 </section>
-
 
 
 

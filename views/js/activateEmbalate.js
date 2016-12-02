@@ -1,10 +1,10 @@
+
 var app = angular.module('activateEmbalate',['ngFileUpload']);
 
 
 
 
 app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scope, Upload){
-
 
 
 
@@ -191,7 +191,6 @@ Estudiantes
 
 
 
-
     //set values default
     $scope.setDefaultValues=function(){
         $scope.errorLogin = "";
@@ -262,7 +261,7 @@ Estudiantes
                             if(($scope.listado!=undefined)&&($scope.listado!='')&&($scope.listado!='[]')&&($scope.listado!='{}')){
                                 on_off('estudianteRead','proyectosRead');
                                 on('mainMenu');
-                                $scope.h1 = "Listado de proyectos";
+                                $scope.h1 = "Activate y embalate";
                                 $scope.divActive = "proyectosRead";
                                 //alert($scope.listado.codigoEstudiante);
                                 //console.log('...........................');
@@ -270,7 +269,6 @@ Estudiantes
                                 //console.log('...........................');
                                 //codigo edtudiante con proyectos activos
                                 //est-201611162017372571
-
 
                             }else{
                                 $scope.loginFailed();
@@ -305,7 +303,7 @@ Estudiantes
 
 
 
-    //setear el estudiante
+    //setear estudiante
     $scope.setEstudiante=function(student){
        var student = student;
        $scope.student = student;
@@ -389,6 +387,7 @@ Proyectos
 
 
 
+
     $scope.temaRead=function(){
 
         $scope.temas = [];
@@ -402,6 +401,7 @@ Proyectos
             }); 
     }
     
+
 
 
 
@@ -465,8 +465,7 @@ Proyectos
             $scope.meses = 'meses';
         }
         $scope.months = duracionProyecto / 30;
-        //alert($scope.listado[indice].nombreProyecto);
-        //alert(indice);
+        
     }
 
 
@@ -515,7 +514,7 @@ Mis proyectos
 
     $scope.esteProyectoMisproyec=function(miIndice,codigoProyecto,duracionProyecto){
         $scope.miIndice = miIndice;
-        alert('miIndice enviado es: ' + $scope.miIndice);
+        //alert('miIndice enviado es: ' + $scope.miIndice);
 
         if(duracionProyecto < 30){
             $scope.meses = 'mes';
@@ -523,8 +522,7 @@ Mis proyectos
             $scope.meses = 'meses';
         }
         $scope.months = duracionProyecto / 30;
-        //alert($scope.listado[indice].nombreProyecto);
-        //alert(indice);
+        
     }
 
 
@@ -756,10 +754,10 @@ Efectos visuales
     //turn off este
     $scope.setDivActive=function(active){
         timer7 = setTimeout(function(){ $scope.divActive = active; 
-            //alert($scope.divActive); 
-            console.log('-----Div activo = ------'); 
-            console.log($scope.divActive); 
-        }, 500);
+            alert($scope.divActive); 
+            //console.log('-----Div activo = ------'); 
+            //console.log($scope.divActive); 
+        }, 300);
         
     }
 
