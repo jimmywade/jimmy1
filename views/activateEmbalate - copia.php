@@ -20,22 +20,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-
+  
 </head>
 
 <body ng-app="activateEmbalate" class="fondo-azul">
 
 <section ng-controller="proyectos" data-ng-init="setDefaultValues(); setDefaultViews(); temaRead()">
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -60,27 +50,22 @@
 
 
 
-
-
 <section id="mainMenu" style="display:none;">
 
     <div style="position:fixed; z-index:100; width:100%;">
         <div>
             <div class="row">
                 <div class="col-xs-12" style="background-color:#4285F4; color:#F0F0F0; padding-top:2em; padding-right:2em; padding-bottom: 3em;">
-                    <div class="col-xs-1" style="color:#fff;">
-                        <div id="botonAtras" style="display:none;" ng-click="hs(divActive, 'proyectosRead'); hideSingle('botonAtras')">
-                            <i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i>
-                        </div>    
+                    <div class="col-xs-1" style="color:#fff;" ng-click="hs('proyectosCreate','proyectosRead')">
+                        <i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i>
                     </div>
-                    
                     <div class="col-xs-5" style="padding:0; font-size:22px;">
-                        {{h1}}
+                        Registrar proyecto
                     </div>
-                    <div ng-click="hs(divActive, 'proyectosRead')" class="col-xs-2" style="padding:0;  text-align:center; ">
+                    <div class="col-xs-2" style="padding:0;  text-align:center; ">
                         <i onmouseover="this.style.color='#FFF'" onmouseout="this.style.color = '#EBEBEB'" class="fa fa-refresh fa-2x" style="text-decoration:none; color:#EBEBEB;" aria-hidden="true"></i>
                     </div>
-                    <div ng-click="myProfile( divActive,'estudianteVer' )" class="col-xs-2" style="padding:0;  text-align:center;">
+                    <div class="col-xs-2" style="padding:0;  text-align:center;">
                         <i onmouseover="this.style.color='#FFF'" onmouseout="this.style.color='#EBEBEB'" class="fa fa-user fa-2x" style="text-decoration:none; color:#EBEBEB;" aria-hidden="true"></i>
                     </div>
                     <div class="col-xs-2" style="padding:0;  text-align:center;">
@@ -96,12 +81,13 @@
     <div id="menuLayout10" class="container" style="display:none; position:fixed; z-index:200; width:100%;">
         <div class="row">
             <div class="col-xs-3 col-xs-offset-8" style="padding:1em; background-color:#fff; box-shadow: 0px 0px 40px #666666;">
-                <div ng-click="hs(divActive, 'proyectosCreate'); hideSingle('menuLayout10'); setDivActive('proyectosCreate')" style="width:100%; padding:1em; cursor:pointer; ">Crear proyecto</div><br>
-                <div ng-click="hs(divActive,'misproyecRead'); hideSingle('menuLayout10')" style="width:100%; padding:1em; cursor:pointer; ">Mis proyectos</div><br>
+                <div ng-click="proyectoCreate('proyectosCreate','proyectosCreate'); hideSingle('menuLayout10')" style="width:100%; padding:1em; cursor:pointer; ">Crear proyecto</div><br>
+                <div ng-click="misProyectos('proyectosCreate','misproyecRead'); hideSingle('menuLayout10')" style="width:100%; padding:1em; cursor:pointer; ">Mis proyectos</div><br>
                 <div ng-click="destruirSesion(); hideSingle('menuLayout10')" style="width:100%; padding:1em; cursor:pointer; ">Cerrar sesi&oacute;n</div><br>
             </div>
         </div>
     </div>
+
 
 </section>
 
@@ -263,8 +249,48 @@
 
 
 <section id="estudianteVer" style="display:none;">
+
+    <div style="position:fixed; z-index:100; width:100%;">
+        <div>
+            <div class="row">
+                <div class="col-xs-12" style="background-color:#4285F4; color:#F0F0F0; padding-top:2em; padding-right:2em; padding-bottom: 3em;">
+                    <div class="col-xs-1" style="color:#fff;" ng-click="hs('estudianteVer','proyectosRead')">
+                        <i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-xs-5" style="padding:0; font-size:22px;">
+                        Mi perfil
+                    </div>
+                    <div class="col-xs-2" style="padding:0;  text-align:center; ">
+                        <i onmouseover="this.style.color='#FFF'" onmouseout="this.style.color = '#EBEBEB'" class="fa fa-refresh fa-2x" style="text-decoration:none; color:#EBEBEB;" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-xs-2" style="padding:0;  text-align:center;">
+                        <i onmouseover="this.style.color='#FFF'" onmouseout="this.style.color='#EBEBEB'" class="fa fa-user fa-2x" style="text-decoration:none; color:#EBEBEB;" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-xs-2" style="padding:0;  text-align:center;">
+                        <i ng-click="showSingle('menuLayout')" onmouseover="this.style.color='#FFF'" onmouseout="this.style.color='#EBEBEB'" class="fa fa-ellipsis-v fa-2x" style="text-decoration:none; color:#EBEBEB;" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="clear:both; height:1em; position:fixed; z-index:50; width:100%; background-color:#E0EDFA;"></div> <!-- espacio -->
+    </div>
+
+
+    <div id="menuLayout" class="container" style="display:none; position:fixed; z-index:200; width:100%;">
+        <div class="row">
+            <div class="col-xs-3 col-xs-offset-8" style="padding:1em; background-color:#fff; box-shadow: 0px 0px 40px #666666;">
+                <div ng-click="proyectoCreate('estudianteVer','proyectosCreate')" style="width:100%; padding:1em; cursor:pointer; ">Crear proyecto</div><br>
+                <div ng-click="misProyectos('estudianteVer','misproyecRead')" style="width:100%; padding:1em; cursor:pointer; ">Mis proyectos</div><br>
+                <div ng-click="destruirSesion()" style="width:100%; padding:1em; cursor:pointer; ">Cerrar sesi&oacute;n</div><br>
+            </div>
+        </div>
+    </div>
+
     
     <div style="clear:both; height:9em;"></div> <!-- espacio -->
+
+
+
 
 
     <div style="clear:both; height:2em;"></div>
@@ -301,7 +327,7 @@
                     Upload right away after file selection:
                     -->
 
-                    <div style="text-align:center; margin:0 auto;" class="btn btn-primary" ngf-select="upload($file)"><button><i class="fa fa-file-image-o fa-4x" aria-hidden="true"></i></button></div>
+                    <div class="button" ngf-select="upload($file)"><button><i class="fa fa-file-image-o fa-4x" aria-hidden="true"></i></button></div>
                     <h6><i>Seleccione una imagen de perfil</i></h6>
 
                     <!--                
@@ -597,17 +623,72 @@
 
 
 
-
-
 <section id="proyectosRead" style="display:none;">
     
     <div id="proyectosConsultaHalf" style="display:block;clear:both;">
+
+        <div style="position:fixed; z-index:100; width:100%;">
+            <div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12" style="background-color:#4285F4; color:#F0F0F0; padding-top:2em; padding-left:8em; padding-right:2em; padding-bottom: 3em;">
+                        <div class="col-xs-6" style="padding:0; font-size:22px;">
+                            Listado de proyectos
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2" style="padding:0;  text-align:center; ">
+                            <i onmouseover="this.style.color='#FFF'" onmouseout="this.style.color = '#EBEBEB'" class="fa fa-refresh fa-2x" style="text-decoration:none; color:#EBEBEB;" aria-hidden="true"></i>
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2" style="padding:0;  text-align:center;">
+                            <i ng-click="myProfile('proyectosRead','estudianteVer')" onmouseover="this.style.color='#FFF'" onmouseout="this.style.color='#EBEBEB'" class="fa fa-user fa-2x" style="text-decoration:none; color:#EBEBEB;" aria-hidden="true"></i>
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2" style="padding:0;  text-align:center;">
+                            <i ng-click="showSingle('menuLayout2')" onmouseover="this.style.color='#FFF'" onmouseout="this.style.color='#EBEBEB'" class="fa fa-ellipsis-v fa-2x" style="text-decoration:none; color:#EBEBEB;" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="clear:both; height:1em; position:fixed; z-index:50; width:100%; background-color:#E0EDFA;"></div> <!-- espacio -->
+        </div>
+
+        <div id="menuLayout2" class="container" style="display:none; position:fixed; z-index:200; width:100%;">
+            <div class="row">
+                <div class="col-xs-3 col-xs-offset-8" style="padding:1em; background-color:#fff; box-shadow: 0px 0px 40px #666666;">
+                    <div ng-click="proyectoCreate('proyectosRead','proyectosCreate')" style="width:100%; padding:1em; cursor:pointer; ">Crear proyecto</div><br>
+                    <div ng-click="misProyectos('proyectosRead','misproyecRead')" style="width:100%; padding:1em; cursor:pointer; ">Mis proyectos</div><br>
+                    <div ng-click="destruirSesion()" style="width:100%; padding:1em; cursor:pointer; ">Cerrar sesi&oacute;n</div><br>
+                </div>
+            </div>
+        </div>
         
         <div style="clear:both; height:9em;"></div> <!-- espacio -->
         <div class="container">
             <div class="row" ng-repeat="l in listado">
                 <div style="background-color:#FFF; padding:1em; border-bottom:solid 1px #d5d5d5;" 
-                    ng-click="esteProyecto($index,l.codigoProyecto,l.duracionProyecto); hs(divActive,'proyectosDetalle')"> 
+                    ng-click="esteProyecto(
+                        l.codigoImagen,
+                        l.nombreImagen,
+                        l.codigoProyecto,
+                        l.nombreProyecto,
+                        l.problemaProyecto,
+                        l.estadoProyecto,
+                        l.objetivoProyecto,
+                        l.especificoProyecto,
+                        l.actividadProyecto,
+                        l.resultadoProyecto,
+                        l.valorProyecto,
+                        l.beneficiarioProyecto,
+                        l.areaProyecto,
+                        l.duracionProyecto,
+                        l.codigoCiudad,
+                        l.nombreCiudad,
+                        l.codigoPais,
+                        l.nombrePais,
+                        l.codigoTema,
+                        l.nombreTema,
+                        l.codigoInstitucion,
+                        l.nombreInstitucion,
+                        l.codigoEstudiante,
+                        l.nombreEstudiante
+                    ); hs('proyectosRead','proyectosDetalle')"> 
                     <div class="col-xs-2">
                         <img style="width:100%;" src="../media/proyectos/images/{{l.nombreImagen}}">
                     </div>
@@ -633,16 +714,43 @@
 
 
 
-
-
-
-
-
-
-
-
-
 <section id="proyectosDetalle" style="display:none;">
+
+        <div style="position:fixed; z-index:100; width:100%;">
+            <div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12" style="background-color:#4285F4; color:#F0F0F0; padding-top:2em; padding-right:2em; padding-bottom: 3em;">
+                        <div class="col-xs-1" style="color:#fff;" ng-click="hs('proyectosDetalle','proyectosRead')">
+                            <i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i>
+                        </div>
+                        <div class="col-xs-5" style="padding:0; font-size:22px;">
+                            Detalles del proyecto
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2" style="padding:0;  text-align:center; ">
+                            <i onmouseover="this.style.color='#FFF'" onmouseout="this.style.color = '#EBEBEB'" class="fa fa-refresh fa-2x" style="text-decoration:none; color:#EBEBEB;" aria-hidden="true"></i>
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2" style="padding:0;  text-align:center;">
+                            <i ng-click="show('proyectosDetalle','estudianteVer'); myPerfil()" onmouseover="this.style.color='#FFF'" onmouseout="this.style.color='#EBEBEB'" class="fa fa-user fa-2x" style="text-decoration:none; color:#EBEBEB;" aria-hidden="true"></i>
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2" style="padding:0;  text-align:center;">
+                            <i ng-click="showSingle('menuLayout3')" onmouseover="this.style.color='#FFF'" onmouseout="this.style.color='#EBEBEB'" class="fa fa-ellipsis-v fa-2x" style="text-decoration:none; color:#EBEBEB;" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="clear:both; height:1em; position:fixed; z-index:50; width:100%; background-color:#E0EDFA;"></div> <!-- espacio -->
+        </div>
+
+
+        <div id="menuLayout3" class="container" style="display:none; position:fixed; z-index:200; width:100%;">
+            <div class="row">
+                <div class="col-xs-3 col-xs-offset-8" style="padding:1em; background-color:#fff; box-shadow: 0px 0px 40px #666666;">
+                    <div ng-click="proyectoCreate('proyectosDetalle','proyectosCreate')" style="width:100%; padding:1em; cursor:pointer; ">Crear proyecto</div><br>
+                    <div ng-click="misProyectos('proyectosDetalle','misproyecRead')" style="width:100%; padding:1em; cursor:pointer; ">Mis proyectos</div><br>
+                    <div ng-click="destruirSesion()" style="width:100%; padding:1em; cursor:pointer; ">Cerrar sesi&oacute;n</div><br>
+                </div>
+            </div>
+        </div>
 
 
         <div style="clear:both; height:9em;"></div> <!-- espacio -->
@@ -653,7 +761,7 @@
                 <div class="col-xs-3">
                     <img style="width:100%;" src="../media/proyectos/images/{{nombreImagen}}">
                 </div>
-                <div class="col-xs-8 above"><h3 style="text-align:center;">{{listado[indice].nombreProyecto}}</h3></div>
+                <div class="col-xs-8 above"><h3 style="text-align:center;">{{nombreProyecto}}</h3></div>
             </div>
 
             <div class="row" style="clear:both; height:2em;"><hr></div> <!-- espacio -->
@@ -662,7 +770,7 @@
                     <h4>Pa&iacute;s beneficiario:</h4>
                 </div>
                 <div class="col-xs-9 above">
-                    {{listado[indice].nombrePais}}
+                    {{nombrePais}}
                 </div>
             </div>
             <div class="row" style="clear:both; height:1em;"></div> <!-- espacio -->
@@ -671,7 +779,7 @@
                     <h4>Ciudad:</h4>
                 </div>
                 <div class="col-xs-9 above">
-                    {{listado[indice].nombreCiudad}}
+                    {{nombreCiudad}}
                 </div>
             </div>
             <div class="row" style="clear:both; height:1em;"></div> <!-- espacio -->
@@ -680,7 +788,7 @@
                     <h4>Institucion educativa:</h4>
                 </div>
                 <div class="col-xs-9 above">
-                    {{listado[indice].nombreInstitucion}}
+                    {{nombreInstitucion}}
                 </div>
             </div>
             <div class="row" style="clear:both; height:1em;"></div> <!-- espacio -->
@@ -689,7 +797,7 @@
                     <h4>Estudiantes Responsables:</h4>
                 </div>
                 <div class="col-xs-9 above">
-                    {{listado[indice].nombreEstudiante}}
+                    {{nombreEstudiante}}
                 </div>
             </div>
             <!--
@@ -712,7 +820,7 @@
                     <h4>Tema:</h4>
                 </div>
                 <div class="col-xs-9 above">
-                    {{listado[indice].nombreTema}}
+                    {{nombreTema}}
                 </div>
             </div>
             
@@ -722,7 +830,7 @@
                     <h4>Descripcion:</h4>
                 </div>
                 <div class="col-xs-9 above">
-                    {{listado[indice].problemaProyecto}}
+                    {{problemaProyecto}}
                 </div>
             </div>
             <div class="row" style="clear:both; height:1em;"></div> <!-- espacio -->
@@ -731,7 +839,7 @@
                     <h4>Objetivo general:</h4>
                 </div>
                 <div class="col-xs-9 above">
-                    {{listado[indice].objetivoProyecto}}
+                    {{objetivoProyecto}}
                 </div>
             </div>
             <div class="row" style="clear:both; height:1em;"></div> <!-- espacio -->
@@ -740,7 +848,7 @@
                     <h4>Objetivos especificos:</h4>
                 </div>
                 <div class="col-xs-9 above">
-                    {{listado[indice].especificoProyecto}}
+                    {{especificoProyecto}}
                 </div>
             </div>
             <div class="row" style="clear:both; height:1em;"></div> <!-- espacio -->
@@ -749,7 +857,7 @@
                     <h4>Resultados Esperados:</h4>
                 </div>
                 <div class="col-xs-9 above">
-                    {{listado[indice].resultadoProyecto}}
+                    {{resultadoProyecto}}
                 </div>
             </div>
             <div class="row" style="clear:both; height:1em;"></div> <!-- espacio -->
@@ -758,7 +866,7 @@
                     <h4>Actividades:</h4>
                 </div>
                 <div class="col-xs-9 above">
-                    {{listado[indice].actividadProyecto}}
+                    {{actividadProyecto}}
                 </div>
             </div>
             <div class="row" style="clear:both; height:1em;"></div> <!-- espacio -->
@@ -767,7 +875,7 @@
                 <h4>Poblaci&oacute;n beneficiaria:</h4>
                 </div>
                 <div class="col-xs-9 above">
-                    {{listado[indice].beneficiarioProyecto}}
+                    {{beneficiarioProyecto}}
                 </div>
             </div>
             <div class="row" style="clear:both; height:1em;"></div> <!-- espacio -->
@@ -776,7 +884,7 @@
                     <h4>Area geografica de intervenci&oacute;n:</h4>
                 </div>
                 <div class="col-xs-9 above">
-                    {{listado[indice].areaProyecto}}
+                    {{areaProyecto}}
                 </div>
             </div>
             <div class="row" style="clear:both; height:1em;"></div> <!-- espacio -->
@@ -785,7 +893,7 @@
                     <h4>Valor total del proyecto:</h4>
                 </div>
                 <div class="col-xs-9 above">
-                    {{listado[indice].valorProyecto}}
+                    {{valorProyecto}}
                 </div>
             </div>
             <div class="row" style="clear:both; height:1em;"></div> <!-- espacio -->
@@ -794,7 +902,7 @@
                     <h4>Tiempo de duraci&oacute;n:</h4>
                 </div>
                 <div class="col-xs-9 above">
-                    {{months}} {{meses}}
+                    {{duracionProyecto}} {{meses}}
                 </div>
             </div>
             <div class="row" style="clear:both; height:1em;"></div> <!-- espacio -->
@@ -825,18 +933,48 @@
 
 
 
-
-
-
-
-
 <section id="misproyecRead" style="display:none;">
 
     <div>
- 
+
+        <div style="position:fixed; z-index:100; width:100%;">
+            <div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12" style="background-color:#4285F4; color:#F0F0F0; padding-top:2em; padding-right:2em; padding-bottom: 3em;">
+                        <div class="col-xs-1" style="color:#fff;" ng-click="hs('misproyecRead','proyectosRead')">
+                            <i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i>
+                        </div>
+                        <div class="col-xs-5" style="padding:0; font-size:22px;">
+                            Mis proyectos
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2" style="padding:0;  text-align:center; ">
+                            <i onmouseover="this.style.color='#FFF'" onmouseout="this.style.color = '#EBEBEB'" class="fa fa-refresh fa-2x" style="text-decoration:none; color:#EBEBEB;" aria-hidden="true"></i>
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2" style="padding:0;  text-align:center;">
+                            <i onmouseover="this.style.color='#FFF'" onmouseout="this.style.color='#EBEBEB'" class="fa fa-user fa-2x" style="text-decoration:none; color:#EBEBEB;" aria-hidden="true"></i>
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2" style="padding:0;  text-align:center;">
+                            <i ng-click="showSingle('menuLayout4')" onmouseover="this.style.color='#FFF'" onmouseout="this.style.color='#EBEBEB'" class="fa fa-ellipsis-v fa-2x" style="text-decoration:none; color:#EBEBEB;" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="clear:both; height:1em; position:fixed; z-index:50; width:100%; background-color:#E0EDFA;"></div> <!-- espacio -->
+        </div>
+
+        <div id="menuLayout4" class="container" style="display:none; position:fixed; z-index:200; width:100%;">
+            <div class="row">
+                <div class="col-xs-3 col-xs-offset-8" style="padding:1em; background-color:#fff; box-shadow: 0px 0px 40px #666666;">
+                    <div ng-click="proyectoCreate('misproyecRead','proyectosCreate')" style="width:100%; padding:1em; cursor:pointer; ">Crear proyecto</div><br>
+                    <div style="width:100%; padding:1em; cursor:pointer; ">Mis proyectos</div><br>
+                    <div ng-click="destruirSesion()" style="width:100%; padding:1em; cursor:pointer; ">Cerrar sesi&oacute;n</div><br>
+                </div>
+            </div>
+        </div>
+        
         <div style="clear:both; height:9em;"></div> <!-- espacio -->
         <div class="container">
-            <div class="row" ng-repeat="mp in listado">
+            <div class="row" ng-repeat="mp in mispro">
                 <div class="col-xs-12" style="background-color:#FFF; padding:1em; border-bottom:solid 1px #d5d5d5; cursor:pointer;">
                     <div ng-click="esteProyecto(mp.nombreImagen,mp.nombreProyecto,mp.problemaProyecto)">
                         <div class="col-xs-2">
@@ -844,10 +982,37 @@
                         </div>
                         <div class="col-xs-6 col-xs-offset-1">
                             <div class="col-xs-12" style="color:#a8a8a8; text-align:center;"><h3><b>{{mp.nombreProyecto}}</b></h3></div>
-                            <div class="col-xs-12">{{mp.problemaProyecto | cortarTexto:250 }}</div>
+                            <div class="col-xs-12">{{mp.problemaProyecto | cortarTexto:250}}</div>
                         </div>
 
-                        <div class="col-xs-1 col-xs-offset-1" title="Edit project">
+                        <div class="col-xs-1 col-xs-offset-1" title="Edit project" 
+                        ng-click="miproyecModify(
+                            mp.codigoImagen,
+                            mp.nombreImagen,
+                            mp.codigoProyecto,
+                            mp.nombreProyecto,
+                            mp.problemaProyecto,
+                            mp.estadoProyecto,
+                            mp.objetivoProyecto,
+                            mp.especificoProyecto,
+                            mp.actividadProyecto,
+                            mp.resultadoProyecto,
+                            mp.valorProyecto,
+                            mp.beneficiarioProyecto,
+                            mp.areaProyecto,
+                            mp.duracionProyecto,
+                            mp.codigoCiudad,
+                            mp.nombreCiudad,
+                            mp.codigoPais,
+                            mp.nombrePais,
+                            mp.codigoTema,
+                            mp.nombreTema,
+                            mp.codigoInstitucion,
+                            mp.nombreInstitucion,
+                            mp.codigoEstudiante,
+                            mp.nombreEstudiante
+                        );
+                        hs('misproyecRead','misproyecUpdate')">
                             <div style="width:100%;">
                                 <div style="clear:both; height:4em;"></div> <!-- espacio -->
                             </div>
@@ -862,7 +1027,7 @@
                             <div id="elix" class="btn btn-default" style="width:100%; display: block;" ng-click="hs('elix','elix2')">
                                 <i style="margin:0 auto; color:#d5d5d5;" class="fa fa-times fa-2x" aria-hidden="true"></i>
                             </div>
-                            <div id="elix2" class="btn btn-danger" style="width:100%; display: none;" ng-click="mysproDelete(mp.codigoProyecto); hs('elix2','elix'); ">
+                            <div id="elix2" class="btn btn-danger" style="width:100%; display: none;" ng-click="mysproDelete(mp.codigoProyecto); hs('elix2','elix');  misProyectos('misproyecRead','misproyecRead')">
                                 <i style="margin:0 auto;" class="fa fa-times fa-2x" aria-hidden="true"></i>
                             </div> 
                         </div>
@@ -900,16 +1065,44 @@
 
 
 
-
-
-
-
-
-
-
-
-
 <section id="misproyecUpdate" style="display:none;">
+
+        <div style="position:fixed; z-index:100; width:100%;">
+            <div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12" style="background-color:#4285F4; color:#F0F0F0; padding-top:2em; padding-right:2em; padding-bottom: 3em;">
+                        <div class="col-xs-1" style="color:#fff;" ng-click="hs('misproyecUpdate','proyectosRead')">
+                            <i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i>
+                        </div>
+                        <div class="col-xs-5" style="padding:0; font-size:22px;">
+                            Editar proyecto
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2" style="padding:0;  text-align:center; ">
+                            <i onmouseover="this.style.color='#FFF'" onmouseout="this.style.color = '#EBEBEB'" class="fa fa-refresh fa-2x" style="text-decoration:none; color:#EBEBEB;" aria-hidden="true"></i>
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2" style="padding:0;  text-align:center;">
+                            <i ng-click="show('proyectosDetalle','estudianteVer'); myPerfil()" onmouseover="this.style.color='#FFF'" onmouseout="this.style.color='#EBEBEB'" class="fa fa-user fa-2x" style="text-decoration:none; color:#EBEBEB;" aria-hidden="true"></i>
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2" style="padding:0;  text-align:center;">
+                            <i ng-click="showSingle('menuLayout3')" onmouseover="this.style.color='#FFF'" onmouseout="this.style.color='#EBEBEB'" class="fa fa-ellipsis-v fa-2x" style="text-decoration:none; color:#EBEBEB;" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="clear:both; height:1em; position:fixed; z-index:50; width:100%; background-color:#E0EDFA;"></div> <!-- espacio -->
+        </div>
+
+
+        <div id="menuLayout3" class="container" style="display:none; position:fixed; z-index:200; width:100%;">
+            <div class="row">
+                <div class="col-xs-3 col-xs-offset-8" style="padding:1em; background-color:#fff; box-shadow: 0px 0px 40px #666666;">
+                    <div ng-click="proyectoCreate('misproyecUpdate','proyectosCreate')" style="width:100%; padding:1em; cursor:pointer; ">Crear proyecto</div><br>
+                    <div ng-click="misProyectos('proyectosDetalle','misproyecRead')" style="width:100%; padding:1em; cursor:pointer; ">Mis proyectos</div><br>
+                    <div ng-click="destruirSesion()" style="width:100%; padding:1em; cursor:pointer; ">Cerrar sesi&oacute;n</div><br>
+                </div>
+            </div>
+        </div>
+
         
         <div style="clear:both; height:9em;"></div> <!-- espacio -->
 
@@ -964,7 +1157,9 @@
 
                     </div>
 
+
                 </div>
+
 
             </div>
             <div class="row" style="clear:both; height:3em;"><hr></div> <!-- espacio -->   
@@ -1109,7 +1304,9 @@
             </div>
 
             <!--
+
             PENDIENTE PONER A FUNCIONAR EDITAR DURACION DE PROYECTO!
+
             <div class="row" style="clear:both; height:3em;"><hr></div>
             <div class="row">
                 <div class="form-group">
@@ -1142,10 +1339,8 @@
         </div>
 
 
+
 </section>
-
-
-
 
 
 

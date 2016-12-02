@@ -7,8 +7,6 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
 
 
 
-
-
     $scope.crearUsuario = function(hide,show) {
         var hide=hide;
         var show=show;
@@ -78,21 +76,12 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
         }, function (evt) {
             var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
             console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-            
-
-
-
 
 
         });
 
 
-    
-
         timer = setTimeout(xxx, 2500);
-
-
-
 
     };
 
@@ -181,7 +170,6 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
  
 
     
-
     
     function xxx(){
         $scope.esteToken = localStorage.getItem('student');    
@@ -205,11 +193,17 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
 
 
 
+
     //set values default
     $scope.setDefaultValues=function(){
         $scope.errorLogin = "";
         $scope.aviso3 ="";
         $scope.student="";
+        $scope.h1 = "";
+        $scope.divActive = "";
+        $scope.meses = "";
+        $scope.codigoProyecto = "";
+        $scope.months = "";
     }
 
 
@@ -233,6 +227,7 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
 
 
 
+
     //setear el estudiante
     $scope.setEstudiante=function(student){
        var student = student;
@@ -240,6 +235,8 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
        localStorage.setItem('student', student);
        valor = localStorage.getItem('student');
     }
+
+
 
 
 
@@ -259,9 +256,12 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
 
 
 
+
+
     //OJO siempre inicia sesion
     $scope.emailEstudiante = 'eudes@gmail.com';
     $scope.passwordEstudiante = '123';
+
 
 
 
@@ -299,6 +299,10 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
                             
                             if(($scope.listado!=undefined)&&($scope.listado!='')&&($scope.listado!='[]')&&($scope.listado!='{}')){
                                 on_off('estudianteRead','proyectosRead');
+                                on('mainMenu');
+                                $scope.h1 = "Listado de proyectos";
+                                $scope.divActive = "proyectosRead";
+
                             }else{
                                 $scope.loginFailed();
                             }
@@ -352,26 +356,13 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
                         
                     })
                     .error(function(err){
-                        console.log('cannot reach projects at db');
+                        console.log('cannot reach projects from db');
                     });
     }
 
 
-
-
-
-
-    $scope.proyectoCreate=function(hid,sho){
-        off(hid);
-        on(sho);
-        off('menuLayout');
-        off('menuLayout2');
-        off('menuLayout3');
-        off('menuLayout4');
-        off('menuLayout10');
-    }
-
     
+
 
     //turn off current , turn on main
     $scope.show=function(este,main){
@@ -394,21 +385,6 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
     $scope.proyectoInsert=function(hx,sx){
 
         $scope.student = localStorage.getItem('student');
-
-        /*
-        console.log('estudiante: ' + $scope.student);
-        console.log('elegido tema: ' + $scope.elegidoTema);
-        console.log('nombre: ' + $scope.nombreProyecto);
-        console.log('problema: ' + $scope.problemaProyecto);
-        console.log('objetivo: ' + $scope.objetivoProyecto);
-        console.log('especifico: ' + $scope.especificoProyecto);
-        console.log('resultado: ' + $scope.resultadoProyecto);
-        console.log('actividad: ' + $scope.actividadProyecto);
-        console.log('beneficiario: ' + $scope.beneficiarioProyecto);
-        console.log('area: ' + $scope.areaProyecto);
-        console.log('valor: ' + $scope.valorProyecto);
-        console.log('duracion: ' + $scope.duracionProyecto);
-        */
 
         if(
               ($scope.student!=undefined&&$scope.student!='')
@@ -440,7 +416,6 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
                         console.log('el div a esconder es ' + $scope.hx);
                         console.log('el div a mostrar es es ' + $scope.sx);
                         var foo = $scope.proyectosLoad($scope.hx,$scope.sx);
-                        
                     })
                     .error(function(err){
                                 console.log('error');
@@ -459,25 +434,21 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
 
 
 
-
     $scope.mysproUpdate=function(){
-
         $http.post("../control/misproUpdate.php", {
-            
-            'codigoProyecto':$scope.codigoProyecto2,
-            'nombreProyecto':$scope.nombreProyecto2,
-            'codigoTema':$scope.codigoTema2,
-            'problemaProyecto':$scope.problemaProyecto2,
-            'objetivoProyecto':$scope.objetivoProyecto2,
-            'especificoProyecto':$scope.especificoProyecto2,
-            'resultadoProyecto':$scope.resultadoProyecto2,
-            'actividadProyecto':$scope.actividadProyecto2,
-            'beneficiarioProyecto':$scope.beneficiarioProyecto2,
-            'areaProyecto':$scope.areaProyecto2,
-            'valorProyecto':$scope.valorProyecto2,
-            'duracionProyecto':$scope.duracionProyecto2
-
-                })
+                                                    'codigoProyecto':$scope.codigoProyecto2,
+                                                    'nombreProyecto':$scope.nombreProyecto2,
+                                                    'codigoTema':$scope.codigoTema2,
+                                                    'problemaProyecto':$scope.problemaProyecto2,
+                                                    'objetivoProyecto':$scope.objetivoProyecto2,
+                                                    'especificoProyecto':$scope.especificoProyecto2,
+                                                    'resultadoProyecto':$scope.resultadoProyecto2,
+                                                    'actividadProyecto':$scope.actividadProyecto2,
+                                                    'beneficiarioProyecto':$scope.beneficiarioProyecto2,
+                                                    'areaProyecto':$scope.areaProyecto2,
+                                                    'valorProyecto':$scope.valorProyecto2,
+                                                    'duracionProyecto':$scope.duracionProyecto2
+            })
             .success(function(data,status,headers,config){ 
                 console.log(data);
                 $scope.afterUpdate = data;
@@ -487,6 +458,8 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
                         console.log('no se pudieron realizar los cambios');
                     });
     }
+
+
 
 
 
@@ -503,95 +476,21 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
 
 
 
-    $scope.esteProyecto=function(
-                                    codigoImagen,
-                                    nombreImagen,
-                                    codigoProyecto,
-                                    nombreProyecto,
-                                    problemaProyecto,
-                                    estadoProyecto,
-                                    objetivoProyecto,
-                                    especificoProyecto,
-                                    actividadProyecto,
-                                    resultadoProyecto,
-                                    valorProyecto,
-                                    beneficiarioProyecto,
-                                    areaProyecto,
-                                    duracionProyecto,
-                                    codigoCiudad,
-                                    nombreCiudad,
-                                    codigoPais,
-                                    nombrePais,
-                                    codigoTema,
-                                    nombreTema,
-                                    codigoInstitucion,
-                                    nombreInstitucion,
-                                    codigoEstudiante,
-                                    nombreEstudiante
-                                ){
 
-                                    $scope.codigoImagen = codigoImagen;
-                                    $scope.nombreImagen = nombreImagen;
-                                    $scope.codigoProyecto = codigoProyecto;
-                                    $scope.nombreProyecto = nombreProyecto;
-                                    $scope.problemaProyecto = problemaProyecto;
-                                    $scope.estadoProyecto = estadoProyecto;
-                                    $scope.objetivoProyecto = objetivoProyecto;
-                                    $scope.especificoProyecto = especificoProyecto;
-                                    $scope.actividadProyecto = actividadProyecto;
-                                    $scope.resultadoProyecto = resultadoProyecto;
-                                    $scope.valorProyecto = valorProyecto;
-                                    $scope.beneficiarioProyecto = beneficiarioProyecto;
-                                    $scope.areaProyecto = areaProyecto;
-                                    $scope.duracionProyecto = duracionProyecto/30;
-                                    $scope.codigoPais = codigoPais;
-                                    $scope.nombrePais = nombrePais;
-                                    $scope.codigoCiudad = codigoCiudad;
-                                    $scope.nombreCiudad = nombreCiudad;
-                                    $scope.codigoTema = codigoTema;
-                                    $scope.nombreTema = nombreTema;
-                                    $scope.codigoInstitucion = codigoInstitucion;
-                                    $scope.nombreInstitucion = nombreInstitucion;
-                                    $scope.codigoEstudiante = codigoEstudiante;
-                                    $scope.nombreEstudiante = nombreEstudiante;
-
-                                    if($scope.duracionProyecto ==1){
-                                        $scope.meses = 'mes';
-                                    }else{
-                                        $scope.meses = 'meses';
-                                    }
-
-
-
-                                    /*
-                                    alert($scope.codigoImagen);
-                                    alert($scope.nombreImagen);
-                                    alert($scope.codigoProyecto);
-                                    alert($scope.codigoTema);
-                                    alert($scope.nombreProyecto);
-                                    alert($scope.problemaProyecto);
-                                    alert($scope.estadoProyecto);
-                                    alert($scope.objetivoProyecto);
-                                    alert($scope.especificoProyecto);
-                                    alert($scope.actividadProyecto);
-                                    alert($scope.resultadoProyecto);
-                                    alert($scope.valorProyecto);
-                                    alert($scope.beneficiarioProyecto);
-                                    alert($scope.areaProyecto);
-                                    alert($scope.codigoCiudad);
-                                    alert($scope.nombreCiudad);
-                                    alert($scope.codigoPais);
-                                    alert($scope.nombrePais);  
-                                    alert($scope.codigoTema);
-                                    alert($scope.nombreTema);
-                                    alert($scope.codigoInstitucion);
-                                    alert($scope.nombreInstitucion);
-                                    alert($scope.codigoEstudiante);
-                                    alert($scope.nombreEstudiante);
-                                    */
-                                    
-
+    $scope.esteProyecto=function(indice,codigoProyecto,duracionProyecto){
+        $scope.indice = indice;
+        if(duracionProyecto < 30){
+            $scope.meses = 'mes';
+        }else{
+            $scope.meses = 'meses';
+        }
+        $scope.months = duracionProyecto / 30;
+        //alert($scope.listado[indice].nombreProyecto);
+        //alert(indice);
     }
+
+
+
 
 
     $scope.bordeAvisoClear=function(){
@@ -602,116 +501,64 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
 
 
 
+
     //modify este proyecto
-    
-
     $scope.miproyecModify=function(
-                    codigoImagen2,
-                    nombreImagen2,
-                    codigoProyecto2,
-                    nombreProyecto2,
-                    problemaProyecto2,
-                    estadoProyecto2,
-                    objetivoProyecto2,
-                    especificoProyecto2,
-                    actividadProyecto2,
-                    resultadoProyecto2,
-                    valorProyecto2,
-                    beneficiarioProyecto2,
-                    areaProyecto2,
-                    duracionProyecto2,
-                    codigoCiudad2,
-                    nombreCiudad2,
-                    codigoPais2,
-                    nombrePais2,
-                    codigoTema2,
-                    nombreTema2,
-                    codigoInstitucion2,
-                    nombreInstitucion2,
-                    codigoEstudiante2,
-                    nombreEstudiante2
-                    ){
+        codigoImagen2,
+        nombreImagen2,
+        codigoProyecto2,
+        nombreProyecto2,
+        problemaProyecto2,
+        estadoProyecto2,
+        objetivoProyecto2,
+        especificoProyecto2,
+        actividadProyecto2,
+        resultadoProyecto2,
+        valorProyecto2,
+        beneficiarioProyecto2,
+        areaProyecto2,
+        duracionProyecto2,
+        codigoCiudad2,
+        nombreCiudad2,
+        codigoPais2,
+        nombrePais2,
+        codigoTema2,
+        nombreTema2,
+        codigoInstitucion2,
+        nombreInstitucion2,
+        codigoEstudiante2,
+        nombreEstudiante2
+        ){
 
-
-                                    $scope.codigoImagen2 = codigoImagen2;
-                                    $scope.nombreImagen2 = nombreImagen2;
-                                    $scope.codigoProyecto2 = codigoProyecto2;
-                                    $scope.nombreProyecto2 = nombreProyecto2;
-                                    $scope.problemaProyecto2 = problemaProyecto2;
-                                    $scope.estadoProyecto2 = estadoProyecto2;
-                                    $scope.objetivoProyecto2 = objetivoProyecto2;
-                                    $scope.especificoProyecto2 = especificoProyecto2;
-                                    $scope.actividadProyecto2 = actividadProyecto2;
-                                    $scope.resultadoProyecto2 = resultadoProyecto2;
-                                    $scope.valorProyecto2 = valorProyecto2;
-                                    $scope.beneficiarioProyecto2 = beneficiarioProyecto2;
-                                    $scope.areaProyecto2 = areaProyecto2;
-                                    $scope.duracionProyecto2 = duracionProyecto2;
-                                    $scope.codigoPais2 = codigoPais2;
-                                    $scope.nombrePais2 = nombrePais2;
-                                    $scope.codigoCiudad2 = codigoCiudad2;
-                                    $scope.nombreCiudad2 = nombreCiudad2;
-                                    $scope.codigoTema2 = codigoTema2;
-                                    $scope.nombreTema2 = nombreTema2;
-                                    $scope.codigoInstitucion2 = codigoInstitucion2;
-                                    $scope.nombreInstitucion2 = nombreInstitucion2;
-                                    $scope.codigoEstudiante2 = codigoEstudiante2;
-                                    $scope.nombreEstudiante2 = nombreEstudiante2;
-                                    
-
-                                    /*
-                                    //pendiente poner a funcionar editar duracion de proyecto
-                                    if($scope.duracionProyecto < 2){
-                                        $scope.meses2 = 'mes';
-                                    }else{
-                                        $scope.meses2 = 'meses';
-                                    }
-
-                                   
-
-    /*        
-        $scope.codigoProyecto2 = codigoProyecto;
-        $scope.nombreProyecto2 = nombreProyecto;
-        $scope.problemaProyecto2 = problemaProyecto;
-        $scope.objetivoProyecto2 = objetivoProyecto;
-        $scope.especificoProyecto2 = especificoProyecto;
-        $scope.actividadProyecto2 = actividadProyecto;
-        $scope.resultadoProyecto2 = resultadoProyecto;
-        $scope.valorProyecto2 = valorProyecto;
-        $scope.beneficiarioProyecto2 = beneficiarioProyecto;
-        $scope.areaProyecto2 = areaProyecto;
-        $scope.codigoTema2 = codigoTema;
-    */
-
-    /*
-        $scope.codigoImagen2 = $scope.codigoImagen;
-        $scope.nombreImagen2 = $scope.nombreImagen;
-        $scope.codigoProyecto2 = $scope.codigoProyecto; 
-        $scope.nombreProyecto2 = $scope.nombreProyecto;
-        $scope.problemaProyecto2 = $scope.problemaProyecto;
-        $scope.estadoProyecto2 = $scope.estadoProyecto;
-        $scope.objetivoProyecto2 = $scope.objetivoProyecto;
-        $scope.especificoProyecto2 = $scope.especificoProyecto;
-        $scope.actividadProyecto2 = $scope.actividadProyecto;
-        $scope.resultadoProyecto2 = $scope.resultadoProyecto;
-        $scope.valorProyecto2 = $scope.valorProyecto;
-        $scope.beneficiarioProyecto2 = $scope.beneficiarioProyecto;
-        $scope.areaProyecto2 = $scope.areaProyecto;
-        $scope.duracionProyecto2 = $scope.duracionProyecto;
-        $scope.codigoPais2 = $scope.codigoPais;
-        $scope.nombrePais2 = $scope.nombrePais;
-        $scope.codigoCiudad2 = $scope.codigoCiudad;
-        $scope.nombreCiudad2 = $scope.nombreCiudad;
-        $scope.codigoTema2 = $scope.codigoTema;
-        $scope.nombreTema2 = $scope.nombreTema;
-        $scope.codigoInstitucion2 = $scope.codigoInstitucion;
-        $scope.nombreInstitucion2 = $scope.nombreInstitucion;
-        $scope.codigoEstudiante2 = $scope.codigoEstudiante;
-        $scope.nombreEstudiante2 = $scope.nombreEstudiante;
-    */
+            $scope.codigoImagen2 = codigoImagen2;
+            $scope.nombreImagen2 = nombreImagen2;
+            $scope.codigoProyecto2 = codigoProyecto2;
+            $scope.nombreProyecto2 = nombreProyecto2;
+            $scope.problemaProyecto2 = problemaProyecto2;
+            $scope.estadoProyecto2 = estadoProyecto2;
+            $scope.objetivoProyecto2 = objetivoProyecto2;
+            $scope.especificoProyecto2 = especificoProyecto2;
+            $scope.actividadProyecto2 = actividadProyecto2;
+            $scope.resultadoProyecto2 = resultadoProyecto2;
+            $scope.valorProyecto2 = valorProyecto2;
+            $scope.beneficiarioProyecto2 = beneficiarioProyecto2;
+            $scope.areaProyecto2 = areaProyecto2;
+            $scope.duracionProyecto2 = duracionProyecto2;
+            $scope.codigoPais2 = codigoPais2;
+            $scope.nombrePais2 = nombrePais2;
+            $scope.codigoCiudad2 = codigoCiudad2;
+            $scope.nombreCiudad2 = nombreCiudad2;
+            $scope.codigoTema2 = codigoTema2;
+            $scope.nombreTema2 = nombreTema2;
+            $scope.codigoInstitucion2 = codigoInstitucion2;
+            $scope.nombreInstitucion2 = nombreInstitucion2;
+            $scope.codigoEstudiante2 = codigoEstudiante2;
+            $scope.nombreEstudiante2 = nombreEstudiante2;
 
     }
     
+
+
 
 
     //Update este proyecto
@@ -754,11 +601,12 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
 
 
 
+
+
+/*
     //delete proyect
-    $scope.misProyectos=function(a,b){
-        //alert($scope.codigoTema);
-        var a =a;         
-        var b =b;         
+    $scope.misProyectos=function(hide,show){
+        //alert($scope.codigoTema);    
         $scope.mispro = [];
 
         $scope.esteEstudiante = localStorage.getItem('student');
@@ -769,16 +617,15 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
                 $scope.mispro = data;
                 
                 if(($scope.mispro!=undefined)&&($scope.mispro!='')&&($scope.mispro!='[]')&&($scope.mispro!='{}')){
-                    off(a);
-                    on(b);
+                    off(hide);
+                    on(show);
                 }
             })
             .error(function(err){
                 console.log('no fue posible consultar mis proyectos');
             });
     }
-    
-
+*/    
 
 
 
@@ -789,9 +636,11 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
     }
 
 
+
+
     //reload 
     $scope.destruirSesion=function(){
-        var student = null;
+        var student = undefined;
         $scope.student = student;
         localStorage.setItem('student', student);
         valor = localStorage.getItem('student');
@@ -799,6 +648,7 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
     }
 
     
+
 
     //hide and show 
     $scope.hs=function(h,s){
@@ -810,21 +660,46 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
 
 
 
+
     //turn off current , turn on main
     $scope.showSingle=function(este){
-        var este= este;
         on(este);
     }
 
 
 
+
+    //turn off este
+    $scope.hideSingle=function(este){
+        off(este);
+    }
+
+
+
+
+    //turn off este
+    $scope.h1=function(tituloH1){
+        $scope.h1 = tituloH1;
+    }
+
+
+
+
+    //turn off este
+    $scope.setDivActive=function(active){
+        timer7 = setTimeout(function(){ $scope.divActive = active; alert($scope.divActive); console.log('-----------'); console.log($scope.divActive); }, 500);
+        
+    }
+
+
+
+
     //consultar datos perfil este estudiante
-    $scope.myProfile=function(whine,kotch){
+    $scope.myProfile=function(hide,show){
         var whine = whine;         
         var kotch = kotch;
         $scope.esteToken = localStorage.getItem('student');    
         $scope.myprofi = [];
-
 
         $http.post("../control/myprofiRead.php",{'esteToken':$scope.esteToken})
             .success(function(data,status,headers,config){
@@ -832,22 +707,22 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
                 $scope.myprofi = data;
                 
                 if(($scope.myprofi!=undefined)&&($scope.myprofi!='')&&($scope.myprofi!='[]')&&($scope.myprofi!='{}')){
-                    off(whine);
-                    on(kotch);
+                    off(hide);
+                    on(show);
                 }
             })
             .error(function(err){
                 console.log('no fue posible consultar este perfil');
             });
-           
+
     }
-    
 
 
 
 
 
 }]);
+
 
 
 
