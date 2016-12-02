@@ -652,8 +652,6 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
 
     //hide and show 
     $scope.hs=function(h,s){
-        var h = h;
-        var s = s; 
         off(h);
         on(s);
     }

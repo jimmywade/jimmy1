@@ -607,12 +607,12 @@
         <div class="container">
             <div class="row" ng-repeat="l in listado">
                 <div style="background-color:#FFF; padding:1em; border-bottom:solid 1px #d5d5d5;" 
-                    ng-click="esteProyecto($index,l.codigoProyecto,l.duracionProyecto); hs(divActive,'proyectosDetalle')"> 
+                    ng-click="esteProyecto($index,l.codigoProyecto,l.duracionProyecto); hs(divActive,'proyectosDetalle'); setDivActive('proyectosDetalle') "> 
                     <div class="col-xs-2">
                         <img style="width:100%;" src="../media/proyectos/images/{{l.nombreImagen}}">
                     </div>
                     <div class="col-xs-8 col-xs-offset-1">
-                        <div class="col-xs-12" style="color:#a8a8a8; text-align:center;"><h3><b>{{l.nombreProyecto}}</b></h3></div>
+                        <div class="col-xs-12" style="color:#a8a8a8; text-align:center;"><h3><b>{{l.nombreProyecto}} divActive: {{divActive}}</b></h3></div>
                         <div class="col-xs-12">{{l.problemaProyecto | cortarTexto:250}}</div>
                     </div>
                     <div style="clear:both; height:1px;"></div> <!-- espacio -->
@@ -648,7 +648,7 @@
         <div style="clear:both; height:9em;"></div> <!-- espacio -->
 
 
-        <div class="container" style="background-color:#FFF; padding-left:5em; padding-right:5em; padding-top:1em; padding-bottom:5em;">
+        <div class="container" style="background-color:#FFF; padding-left:5em; padding-right:5em; padding-top:1em; padding-bottom:5em; margin-bottom:40px;">
             <div class="row">
                 <div class="col-xs-3">
                     <img style="width:100%;" src="../media/proyectos/images/{{nombreImagen}}">
