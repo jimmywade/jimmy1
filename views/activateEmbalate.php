@@ -547,7 +547,7 @@
                     </div>
 
                     <div class="col-xs-12 col-sm-2">
-                        <button ng-click=" proyectoInsert(divActive,'proyectosRead'); setDivActive('proyectosRead') " style="width:100%;" class="btn btn-primary"><i class="fa fa-check fa-1x" style="text-decoration:none; color:#EBEBEB;" aria-hidden="true"></i></button>
+                        <button ng-click=" proyectoInsert(divActive,'proyectosRead') " style="width:100%;" class="btn btn-primary"><i class="fa fa-check fa-1x" style="text-decoration:none; color:#EBEBEB;" aria-hidden="true"></i></button>
                     </div>
                 </div>
             </div>

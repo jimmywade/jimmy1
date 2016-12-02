@@ -131,10 +131,12 @@ Estudiantes
             data: {file: file, 'username': $scope.username,'codigoImagen':$scope.codigoImagen2}
         }).then(function (resp) {
             console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+
+            /*
             if(resp.data){
                 timer3 = setTimeout($scope.proyectosLoad('misproyecUpdate','proyectosRead'), 3000);
             }
-            
+            */
            
         }, function (resp) {
             console.log('Error status: ' + resp.status);
@@ -237,14 +239,15 @@ Estudiantes
                     'emailEstudiante':$scope.emailEstudiante,
                     'passwordEstudiante':$scope.passwordEstudiante
             })
-            .success(function(datos,status,headers,config){ 
+            .success(function(datos,status,headers,config){
+                console.log('------- DATOS: ------');
                 console.log(datos);
                 $scope.estudianteRead = datos;
 
                 //setear el estudiante
                 $scope.student = $scope.estudianteRead[0].codigoEstudiante;
                 $scope.success = $scope.estudianteRead[0].success;
-                console.log('-------------------------');
+                console.log('---EL QUE SERA TOKEN: -------');
                 console.log($scope.student);
                 
                 //validar si success es true
@@ -253,14 +256,25 @@ Estudiantes
                     $scope.listado = [];
                     $http.get("../control/proyectoRead.php")
                         .success(function(data,status,headers,config){
+                        
+                        console.log('--- LISTADO PROYECTOS: ----');
                             console.log(data);
                             $scope.listado = data;
+                        console.log('--- LISTADO PROYECTOS: ----');
                             
                             if(($scope.listado!=undefined)&&($scope.listado!='')&&($scope.listado!='[]')&&($scope.listado!='{}')){
                                 on_off('estudianteRead','proyectosRead');
                                 on('mainMenu');
                                 $scope.h1 = "Activate y embalate";
                                 $scope.divActive = "proyectosRead";
+                                console.log('------- ULTIMO IF ------');
+                                console.log('------- ULTIMO IF ------');
+                                console.log('------- ULTIMO IF ------');
+                                console.log('------- ULTIMO IF ------');
+                                console.log('------- ULTIMO IF ------');
+                                console.log('------- ULTIMO IF ------');
+                                console.log('------- ULTIMO IF ------');
+
                                 //alert($scope.listado.codigoEstudiante);
                                 //console.log('...........................');
                                 //console.log($scope.listado.codigoEstudiante);
@@ -430,16 +444,30 @@ Proyectos
 
                 $http.post("../control/proyectoCreate.php", {'codigoEstudiante':$scope.student,'elegidoTema':$scope.elegidoTema,'nombreProyecto':$scope.nombreProyecto,'problemaProyecto':$scope.problemaProyecto,'objetivoProyecto':$scope.objetivoProyecto,'especificoProyecto':$scope.especificoProyecto,'actividadProyecto':$scope.actividadProyecto,'resultadoProyecto':$scope.resultadoProyecto,'valorProyecto':$scope.valorProyecto,'beneficiarioProyecto':$scope.beneficiarioProyecto,'areaProyecto':$scope.areaProyecto,'duracionProyecto':$scope.duracionProyecto })
                     .success(function(data,status,headers,config){ 
+                        console.log('---- DATA: ----- ');
                         console.log(data);
-                        $scope.afterUpdate = data;
+                        //$scope.afterUpdate = data;
+                        console.log('---- STATUS: ----- ');
                         console.log(status);
+                        console.log('---- HEADERS: ----- ');
                         console.log(headers);
+                        console.log('---- CONFIG: ----- ');
                         console.log(config);
+                        console.log('........................ ');
+
                         $scope.hx=hx;
                         $scope.sx=sx;
                         console.log('el div a esconder es ' + $scope.hx);
+                        console.log('........................ ');
+
                         console.log('el div a mostrar es es ' + $scope.sx);
-                        var foo = $scope.proyectosLoad($scope.hx,$scope.sx);
+                        console.log('........................ ');
+
+                        var foo = $scope.proyectosReadApply();
+                        var foo = $scope.hs(hx,sx);
+                        var foo = $scope.setDivActive('proyectosRead');
+
+                        console.log('.-.-.-.-.-.-.-.-.-.-.- ');
                     })
                     .error(function(err){
                                 console.log('error');
