@@ -191,6 +191,7 @@ Estudiantes
 
 
 
+
     //set values default
     $scope.setDefaultValues=function(){
         $scope.errorLogin = "";
@@ -201,9 +202,12 @@ Estudiantes
         $scope.meses = "";
         $scope.codigoProyecto = "";
         $scope.months = "";
+        $scope.indice = "";
+        $scope.miIndice = "";
         $scope.emailEstudiante = 'eudes@gmail.com';
         $scope.passwordEstudiante = '123';
     }
+
 
 
 
@@ -400,6 +404,7 @@ Proyectos
     
 
 
+
     $scope.proyectoInsert=function(hx,sx){
 
         $scope.student = localStorage.getItem('student');
@@ -421,7 +426,7 @@ Proyectos
             &&($scope.valorProyecto!=undefined&&$scope.valorProyecto!='')
             &&($scope.duracionProyecto!=undefined&&$scope.duracionProyecto!='')
         ){
-                
+
                 $http.post("../control/proyectoCreate.php", {'codigoEstudiante':$scope.student,'elegidoTema':$scope.elegidoTema,'nombreProyecto':$scope.nombreProyecto,'problemaProyecto':$scope.problemaProyecto,'objetivoProyecto':$scope.objetivoProyecto,'especificoProyecto':$scope.especificoProyecto,'actividadProyecto':$scope.actividadProyecto,'resultadoProyecto':$scope.resultadoProyecto,'valorProyecto':$scope.valorProyecto,'beneficiarioProyecto':$scope.beneficiarioProyecto,'areaProyecto':$scope.areaProyecto,'duracionProyecto':$scope.duracionProyecto })
                     .success(function(data,status,headers,config){ 
                         console.log(data);
@@ -452,6 +457,8 @@ Proyectos
 
     $scope.esteProyecto=function(indice,codigoProyecto,duracionProyecto){
         $scope.indice = indice;
+        alert('el indice enviado es: ' + $scope.indice);
+
         if(duracionProyecto < 30){
             $scope.meses = 'mes';
         }else{
@@ -466,7 +473,6 @@ Proyectos
 
 
 
-
 /*
 *********************************************************************************************
 Mis proyectos 
@@ -476,18 +482,71 @@ Mis proyectos
 
 
 
-    //ver este proyecto completo
-    $scope.proyectosDetalleApply=function(indice){
+
+    //mis proyectos
+    $scope.misProyectos = function(h,s){
+               
+        $scope.mispro = [];
+
+        $scope.esteEstudiante = localStorage.getItem('student');
+
+        $http.post("../control/misproRead.php", {'esteEstudiante':$scope.esteEstudiante})
+            .success(function(data,status,headers,config){
+                console.log('------------MIS PROYECTOS----------');
+                console.log(data);
+                console.log('----------------------');
+                $scope.mispro = data;
+
+                if(($scope.mispro!=undefined)&&($scope.mispro!='')&&($scope.mispro!='[]')&&($scope.mispro!='{}')){
+                    off(h);
+                    on(s);
+                    var anything = $scope.setDivActive(s);
+                }
+            })
+            .error(function(err){
+                console.log('no fue posible consultar mis proyectos');
+            });
+    }
+    
+
+
+
+
+
+    $scope.esteProyectoMisproyec=function(miIndice,codigoProyecto,duracionProyecto){
+        $scope.miIndice = miIndice;
+        alert('miIndice enviado es: ' + $scope.miIndice);
+
+        if(duracionProyecto < 30){
+            $scope.meses = 'mes';
+        }else{
+            $scope.meses = 'meses';
+        }
+        $scope.months = duracionProyecto / 30;
+        //alert($scope.listado[indice].nombreProyecto);
         //alert(indice);
+    }
+
+
+
+
+
+/*    
+    //ver este proyecto completo
+    $scope.proyectosDetalleApply=function(indio){
+
         setTimeout(function(){ 
-                        $scope.$apply(function(){
+
+                        $scope.$apply(function(){   alert('Scope indice: ' + $scope.indice);
                                                     $scope.indice;
+                                                    $scope.listado[indice].nombreProyecto
+
                                                });
                         },3000
                   );
 
     }
-
+*/
 
 
 
@@ -696,7 +755,11 @@ Efectos visuales
 
     //turn off este
     $scope.setDivActive=function(active){
-        timer7 = setTimeout(function(){ $scope.divActive = active; alert($scope.divActive); console.log('-----------'); console.log($scope.divActive); }, 500);
+        timer7 = setTimeout(function(){ $scope.divActive = active; 
+            //alert($scope.divActive); 
+            console.log('-----Div activo = ------'); 
+            console.log($scope.divActive); 
+        }, 500);
         
     }
 

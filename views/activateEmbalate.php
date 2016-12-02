@@ -2,6 +2,8 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="expires" content="0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <title>activate y embalate</title>
@@ -97,7 +99,7 @@
         <div class="row">
             <div class="col-xs-3 col-xs-offset-8" style="padding:1em; background-color:#fff; box-shadow: 0px 0px 40px #666666;">
                 <div ng-click="hs(divActive, 'proyectosCreate'); hideSingle('menuLayout10'); setDivActive('proyectosCreate')" style="width:100%; padding:1em; cursor:pointer; ">Crear proyecto</div><br>
-                <div ng-click="hs(divActive,'misproyecRead'); hideSingle('menuLayout10'); setDivActive('misproyecRead')" style="width:100%; padding:1em; cursor:pointer; ">Mis proyectos</div><br>
+                <div ng-click="misProyectos(divActive,'misproyecRead'); hideSingle('menuLayout10')" style="width:100%; padding:1em; cursor:pointer; ">Mis proyectos</div><br>
                 <div ng-click="destruirSesion(); hideSingle('menuLayout10')" style="width:100%; padding:1em; cursor:pointer; ">Cerrar sesi&oacute;n</div><br>
             </div>
         </div>
@@ -712,7 +714,7 @@
                     <h4>Tema:</h4>
                 </div>
                 <div class="col-xs-9 above">
-                    {{listado[indice].nombreTema | orderBy}}
+                    {{listado[indice].nombreTema}}
                 </div>
             </div>
             
@@ -840,14 +842,14 @@
  
         <div style="clear:both; height:9em;"></div> <!-- espacio -->
         <div class="container">
-            <div class="row" ng-repeat="mp in listado | filter: student">
+            <div class="row" ng-repeat="mp in mispro">
                 <div class="col-xs-12" style="background-color:#FFF; padding:1em; border-bottom:solid 1px #d5d5d5; cursor:pointer;">
-                    <div ng-click="esteProyecto($index,mp.codigoProyecto,mp.duracionProyecto); hs(divActive,'proyectosDetalle'); setDivActive('proyectosDetalle'); proyectosDetalleApply($index)">
+                    <div ng-click="esteProyectoMisproyec($index,mp.codigoProyecto,mp.duracionProyecto); hs(divActive,'misproyecDetalle'); setDivActive('misproyecDetalle')">
                         <div class="col-xs-2">
                             <img style="width:100%;" src="../media/proyectos/images/{{mp.nombreImagen}}">
                         </div>
                         <div class="col-xs-6 col-xs-offset-1">
-                            <div class="col-xs-12" style="color:#a8a8a8; text-align:center;"><h3><b>{{mp.nombreProyecto}}</b></h3></div>
+                            <div class="col-xs-12" style="color:#a8a8a8; text-align:center;"><h3><b> El indice es: {{miIndice}} {{mp.nombreProyecto}}</b></h3></div>
                             <div class="col-xs-12">{{mp.problemaProyecto | cortarTexto:250 }}</div>
                         </div>
 
@@ -880,7 +882,6 @@
         
     </div>
 
-
 </section>
 
 
@@ -895,6 +896,193 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section id="misproyecDetalle" style="display:none;">
+
+
+        <div style="clear:both; height:9em;"></div> <!-- espacio -->
+
+
+        <div class="container" style="background-color:#FFF; padding-left:5em; padding-right:5em; padding-top:1em; padding-bottom:5em; margin-bottom:40px;">
+            <div class="row">
+                <div class="col-xs-3">
+                    <img style="width:100%;" src="../media/proyectos/images/{{nombreImagen}}">
+                </div>
+                <div class="col-xs-8 above"><h3 style="text-align:center;">{{mispro[miIndice].nombreProyecto}}</h3></div>
+            </div>
+
+            <div class="row" style="clear:both; height:2em;"><hr></div> <!-- espacio -->
+            <div class="row">
+                <div class="col-xs-3">
+                    <h4>Pa&iacute;s beneficiario:</h4>
+                </div>
+                <div class="col-xs-9 above">
+                    {{mispro[miIndice].nombrePais}}
+                </div>
+            </div>
+            <div class="row" style="clear:both; height:1em;"></div> <!-- espacio -->
+            <div class="row">
+                <div class="col-xs-3">
+                    <h4>Ciudad:</h4>
+                </div>
+                <div class="col-xs-9 above">
+                    {{mispro[miIndice].nombreCiudad}}
+                </div>
+            </div>
+            <div class="row" style="clear:both; height:1em;"></div> <!-- espacio -->
+            <div class="row">
+                <div class="col-xs-3">
+                    <h4>Institucion educativa:</h4>
+                </div>
+                <div class="col-xs-9 above">
+                    {{mispro[miIndice].nombreInstitucion}}
+                </div>
+            </div>
+            <div class="row" style="clear:both; height:1em;"></div> <!-- espacio -->
+            <div class="row">
+                <div class="col-xs-3">
+                    <h4>Estudiantes Responsables:</h4>
+                </div>
+                <div class="col-xs-9 above">
+                    {{mispro[miIndice].nombreEstudiante}}
+                </div>
+            </div>
+            <!--
+            <div class="row" style="clear:both; height:1em;"></div> 
+            --> 
+            <!-- espacio -->
+            <!--
+            <div class="row">
+                <div class="col-xs-3">
+                    <h4>Personas y entidades de apoyo:</h4>
+                </div>
+                <div class="col-xs-9">
+                    
+                </div>
+            </div>
+            -->
+            <div class="row" style="clear:both; height:1em;"></div> <!-- espacio -->
+            <div class="row">
+                <div class="col-xs-3">
+                    <h4>Tema:</h4>
+                </div>
+                <div class="col-xs-9 above">
+                    {{mispro[miIndice].nombreTema}}
+                </div>
+            </div>
+            
+            <div class="row" style="clear:both; height:1em;"></div> <!-- espacio -->
+            <div class="row">
+                <div class="col-xs-3">
+                    <h4>Descripcion:</h4>
+                </div>
+                <div class="col-xs-9 above">
+                    {{mispro[miIndice].problemaProyecto}}
+                </div>
+            </div>
+            <div class="row" style="clear:both; height:1em;"></div> <!-- espacio -->
+            <div class="row">
+                <div class="col-xs-3">
+                    <h4>Objetivo general:</h4>
+                </div>
+                <div class="col-xs-9 above">
+                    {{mispro[miIndice].objetivoProyecto}}
+                </div>
+            </div>
+            <div class="row" style="clear:both; height:1em;"></div> <!-- espacio -->
+            <div class="row">
+                <div class="col-xs-3">
+                    <h4>Objetivos especificos:</h4>
+                </div>
+                <div class="col-xs-9 above">
+                    {{mispro[miIndice].especificoProyecto}}
+                </div>
+            </div>
+            <div class="row" style="clear:both; height:1em;"></div> <!-- espacio -->
+            <div class="row">
+                <div class="col-xs-3">
+                    <h4>Resultados Esperados:</h4>
+                </div>
+                <div class="col-xs-9 above">
+                    {{mispro[miIndice].resultadoProyecto}}
+                </div>
+            </div>
+            <div class="row" style="clear:both; height:1em;"></div> <!-- espacio -->
+            <div class="row">
+                <div class="col-xs-3">
+                    <h4>Actividades:</h4>
+                </div>
+                <div class="col-xs-9 above">
+                    {{mispro[miIndice].actividadProyecto}}
+                </div>
+            </div>
+            <div class="row" style="clear:both; height:1em;"></div> <!-- espacio -->
+            <div class="row">
+                <div class="col-xs-3">
+                <h4>Poblaci&oacute;n beneficiaria:</h4>
+                </div>
+                <div class="col-xs-9 above">
+                    {{mispro[miIndice].beneficiarioProyecto}}
+                </div>
+            </div>
+            <div class="row" style="clear:both; height:1em;"></div> <!-- espacio -->
+            <div class="row">
+                <div class="col-xs-3">
+                    <h4>Area geografica de intervenci&oacute;n:</h4>
+                </div>
+                <div class="col-xs-9 above">
+                    {{mispro[miIndice].areaProyecto}}
+                </div>
+            </div>
+            <div class="row" style="clear:both; height:1em;"></div> <!-- espacio -->
+            <div class="row">
+                <div class="col-xs-3">
+                    <h4>Valor total del proyecto:</h4>
+                </div>
+                <div class="col-xs-9 above">
+                    {{mispro[miIndice].valorProyecto}}
+                </div>
+            </div>
+            <div class="row" style="clear:both; height:1em;"></div> <!-- espacio -->
+            <div class="row">
+                <div class="col-xs-3">
+                    <h4>Tiempo de duraci&oacute;n:</h4>
+                </div>
+                <div class="col-xs-9 above">
+                    {{months}} {{meses}}
+                </div>
+            </div>
+            <div class="row" style="clear:both; height:1em;"></div> <!-- espacio -->
+            <div class="row">
+                <div class="col-xs-12">
+                    <img style="width:100%;" src="../media/proyectos/images/{{nombreImagen}}">
+                </div>
+            </div>
+
+        </div>
+
+</section>
 
 
 
