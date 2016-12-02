@@ -712,7 +712,7 @@
                     <h4>Tema:</h4>
                 </div>
                 <div class="col-xs-9 above">
-                    {{listado[indice].nombreTema}}
+                    {{listado[indice].nombreTema | orderBy}}
                 </div>
             </div>
             
@@ -842,7 +842,7 @@
         <div class="container">
             <div class="row" ng-repeat="mp in listado | filter: student">
                 <div class="col-xs-12" style="background-color:#FFF; padding:1em; border-bottom:solid 1px #d5d5d5; cursor:pointer;">
-                    <div ng-click="esteProyecto($index,mp.codigoProyecto,mp.duracionProyecto); hs(divActive,'proyectosDetalle'); setDivActive('proyectosDetalle') ">
+                    <div ng-click="esteProyecto($index,mp.codigoProyecto,mp.duracionProyecto); hs(divActive,'proyectosDetalle'); setDivActive('proyectosDetalle'); proyectosDetalleApply($index)">
                         <div class="col-xs-2">
                             <img style="width:100%;" src="../media/proyectos/images/{{mp.nombreImagen}}">
                         </div>

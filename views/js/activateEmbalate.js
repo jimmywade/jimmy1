@@ -7,6 +7,15 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
 
 
 
+
+/*
+*********************************************************************************************
+Estudiantes
+*********************************************************************************************
+*/
+
+
+
     $scope.crearUsuario = function(hide,show) {
         var hide=hide;
         var show=show;
@@ -77,7 +86,6 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
             var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
             console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
 
-
         });
 
 
@@ -99,10 +107,6 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
       }
     }     
     */
-
-
-
-
 
 
 
@@ -161,12 +165,6 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
     }     
     */
 
-
-
-
-
-
-
  
 
     
@@ -193,7 +191,6 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
 
 
 
-
     //set values default
     $scope.setDefaultValues=function(){
         $scope.errorLogin = "";
@@ -204,9 +201,9 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
         $scope.meses = "";
         $scope.codigoProyecto = "";
         $scope.months = "";
+        $scope.emailEstudiante = 'eudes@gmail.com';
+        $scope.passwordEstudiante = '123';
     }
-
-
 
 
 
@@ -223,37 +220,6 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
             off('proyectosDetalle');
         }
     }
-
-
-
-
-
-
-
-
-
-    $scope.temaRead=function(){
-
-        $scope.temas = [];
-        $http.get("../control/temaRead.php")
-            .success(function(data){
-                console.log(data);
-                $scope.temas = data;
-            })
-            .error(function(err){
-                console.log('error al consultar los temas');
-            }); 
-    }
-
-
-
-
-
-
-    //OJO siempre inicia sesion
-    $scope.emailEstudiante = 'eudes@gmail.com';
-    $scope.passwordEstudiante = '123';
-
 
 
 
@@ -326,6 +292,14 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
 
 
 
+    $scope.bordeAvisoClear=function(){
+        var borde = document.getElementById("bordeAviso");
+        borde.style.border = "0px";
+        $scope.errorLogin = "";
+    }
+
+
+
 
     //setear el estudiante
     $scope.setEstudiante=function(student){
@@ -346,7 +320,6 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
         var borde = document.getElementById("bordeAviso");
         borde.style.border = "solid 2px red";
     }
-
 
 
 
@@ -379,10 +352,15 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
 
 
 
+/*
+*********************************************************************************************
+Proyectos 
+*********************************************************************************************
+*/
 
 
 
-    
+
     $scope.proyectosLoad=function(hhh,sss){
 
         $http.get("../control/proyectoRead.php")
@@ -405,14 +383,21 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
     }
 
 
+
+
+    $scope.temaRead=function(){
+
+        $scope.temas = [];
+        $http.get("../control/temaRead.php")
+            .success(function(data){
+                console.log(data);
+                $scope.temas = data;
+            })
+            .error(function(err){
+                console.log('error al consultar los temas');
+            }); 
+    }
     
-
-
-
-
-
-
-
 
 
     $scope.proyectoInsert=function(hx,sx){
@@ -460,52 +445,7 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
             $scope.aviso3 = 'Faltan datos importantes, Todos los campos son necesarios';
         }
         
-    } 
-
-
-
-
-
-
-    $scope.mysproUpdate=function(){
-        $http.post("../control/misproUpdate.php", {
-                                                    'codigoProyecto':$scope.codigoProyecto2,
-                                                    'nombreProyecto':$scope.nombreProyecto2,
-                                                    'codigoTema':$scope.codigoTema2,
-                                                    'problemaProyecto':$scope.problemaProyecto2,
-                                                    'objetivoProyecto':$scope.objetivoProyecto2,
-                                                    'especificoProyecto':$scope.especificoProyecto2,
-                                                    'resultadoProyecto':$scope.resultadoProyecto2,
-                                                    'actividadProyecto':$scope.actividadProyecto2,
-                                                    'beneficiarioProyecto':$scope.beneficiarioProyecto2,
-                                                    'areaProyecto':$scope.areaProyecto2,
-                                                    'valorProyecto':$scope.valorProyecto2,
-                                                    'duracionProyecto':$scope.duracionProyecto2
-            })
-            .success(function(data,status,headers,config){ 
-                console.log(data);
-                $scope.afterUpdate = data;
-                console.log('cambios realizados exitosamente en el proyecto ' + $scope.nombreProyecto2);
-            })
-            .error(function(err){
-                        console.log('no se pudieron realizar los cambios');
-                    });
     }
-
-
-
-
-
-    $scope.mysproDelete=function(codeProyecto2){
-        $scope.codeProyecto2 = codeProyecto2;
-        $scope.studento = localStorage.getItem('student');
-        $http.post("../control/misproDelete.php", {'codigoProyecto':$scope.codeProyecto2,'codigoEstudiante':$scope.studento})
-            .success(function(data,status,headers,config){ 
-                console.log(data);
-                $scope.afterDelete = data;
-            })
-    }
-
 
 
 
@@ -526,38 +466,29 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
 
 
 
-    $scope.bordeAvisoClear=function(){
-        var borde = document.getElementById("bordeAviso");
-        borde.style.border = "0px";
-        $scope.errorLogin = "";
-    }
-
-
 
 /*
-
-    //mis proyectos
-    $scope.misProyectos=function(hide,show){
-   
-        $scope.misproyec = [];
-
-        $scope.esteEstudiante = localStorage.getItem('student');
-
-        $http.post("../control/misproRead.php", {'esteEstudiante':$scope.esteEstudiante})
-            .success(function(data,status,headers,config){
-                console.log(data);
-                $scope.misproyec = data;
-                
-                if(($scope.mispro!=undefined)&&($scope.mispro!='')&&($scope.mispro!='[]')&&($scope.mispro!='{}')){
-                    var myVar = $scope.hs(hide,show);
-                }
-            })
-            .error(function(err){
-                console.log('no fue posible consultar mis proyectos');
-            });
-    }
-   
+*********************************************************************************************
+Mis proyectos 
+*********************************************************************************************
 */
+
+
+
+
+    //ver este proyecto completo
+    $scope.proyectosDetalleApply=function(indice){
+        //alert(indice);
+        setTimeout(function(){ 
+                        $scope.$apply(function(){
+                                                    $scope.indice;
+                                               });
+                        },3000
+                  );
+
+    }
+
+
 
 
     //modify este proyecto
@@ -659,12 +590,59 @@ app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scop
 
 
 
+    $scope.mysproUpdate=function(){
+        $http.post("../control/misproUpdate.php", {
+                                                    'codigoProyecto':$scope.codigoProyecto2,
+                                                    'nombreProyecto':$scope.nombreProyecto2,
+                                                    'codigoTema':$scope.codigoTema2,
+                                                    'problemaProyecto':$scope.problemaProyecto2,
+                                                    'objetivoProyecto':$scope.objetivoProyecto2,
+                                                    'especificoProyecto':$scope.especificoProyecto2,
+                                                    'resultadoProyecto':$scope.resultadoProyecto2,
+                                                    'actividadProyecto':$scope.actividadProyecto2,
+                                                    'beneficiarioProyecto':$scope.beneficiarioProyecto2,
+                                                    'areaProyecto':$scope.areaProyecto2,
+                                                    'valorProyecto':$scope.valorProyecto2,
+                                                    'duracionProyecto':$scope.duracionProyecto2
+            })
+            .success(function(data,status,headers,config){ 
+                console.log(data);
+                $scope.afterUpdate = data;
+                console.log('cambios realizados exitosamente en el proyecto ' + $scope.nombreProyecto2);
+            })
+            .error(function(err){
+                        console.log('no se pudieron realizar los cambios');
+                    });
+    }
+
+
+
+
+
+    $scope.mysproDelete=function(codeProyecto2){
+        $scope.codeProyecto2 = codeProyecto2;
+        $scope.studento = localStorage.getItem('student');
+        $http.post("../control/misproDelete.php", {'codigoProyecto':$scope.codeProyecto2,'codigoEstudiante':$scope.studento})
+            .success(function(data,status,headers,config){ 
+                console.log(data);
+                $scope.afterDelete = data;
+            })
+    }
 
 
 
 
 
 
+
+
+
+
+/*
+*********************************************************************************************
+Efectos visuales 
+*********************************************************************************************
+*/
 
 
 
