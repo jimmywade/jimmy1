@@ -247,7 +247,7 @@ Estudiantes
                 //setear el estudiante
                 $scope.student = $scope.estudianteRead[0].codigoEstudiante;
                 $scope.success = $scope.estudianteRead[0].success;
-                console.log('---EL QUE SERA TOKEN: -------');
+                console.log('------------');
                 console.log($scope.student);
                 
                 //validar si success es true
@@ -267,9 +267,6 @@ Estudiantes
                                 on('mainMenu');
                                 $scope.h1 = "Activate y embalate";
                                 $scope.divActive = "proyectosRead";
-                                console.log('------- ULTIMO IF ------');
-                                console.log('------- ULTIMO IF ------');
-                                console.log('------- ULTIMO IF ------');
                                 console.log('------- ULTIMO IF ------');
                                 console.log('------- ULTIMO IF ------');
                                 console.log('------- ULTIMO IF ------');

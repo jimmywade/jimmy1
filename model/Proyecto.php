@@ -54,7 +54,7 @@
 			$duracionProyecto){
 	    	$sql = "
 		    INSERT INTO proyectos (codigoProyecto, codigoTema, nombreProyecto, problemaProyecto, objetivoProyecto, especificoProyecto, actividadProyecto, resultadoProyecto, beneficiarioProyecto, areaProyecto, valorProyecto, duracionProyecto) 
-		    VALUES ('".$codigoProyecto."','".$codigoTema."','".$nombreProyecto."','".$problemaProyecto."','".$objetivoProyecto."','".$especificoProyecto."','".$actividadProyecto."','".$resultadoProyecto."','".$beneficiarioProyecto."','".$valorProyecto."','".$areaProyecto."','".$duracionProyecto."')
+		    VALUES ('".$codigoProyecto."','".$codigoTema."','".$nombreProyecto."','".$problemaProyecto."','".$objetivoProyecto."','".$especificoProyecto."','".$actividadProyecto."','".$resultadoProyecto."','".$beneficiarioProyecto."','".$areaProyecto."','".$valorProyecto."','".$duracionProyecto."')
 	    	";
 	    	
 			$result = mysqli_query($this->db->connect(), $sql);
