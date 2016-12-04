@@ -233,10 +233,10 @@
                         <div class="col-xs-12 loginForm" id="bordeAviso" ng-keyup="bordeAvisoClear()">
                             <div class="col-xs-12" style="padding:0;">
                                 <div style="border-bottom: solid 1px #585858;">
-                                    <input style="border:none;width:100%;height:3em;" class="loginInput" type="email" ng-model="emailEstudiante" placeholder="Email" required>
+                                    <input style="border:none;width:100%;height:3em;" class="loginInput" type="email" ng-model="emailVoluntario" placeholder="Email" required>
                                 </div>
                                 <div style="border-bottom: solid 1px #585858;">
-                                    <input style="border:none;width:100%;height:3em;" type="password" ng-model="passwordEstudiante" placeholder="Contrase&ntilde;a" required>
+                                    <input style="border:none;width:100%;height:3em;" type="password" ng-model="passwordVoluntario" placeholder="Contrase&ntilde;a" required>
                                 </div>
                             </div>
                         </div>

@@ -17,8 +17,7 @@ Estudiantes
 
 
     $scope.crearUsuario = function(hide,show) {
-            alert($scope.passwordUsuario);
-            alert($scope.passwordUsuario2);
+
         if( $scope.passwordUsuario == $scope.passwordUsuario2){
             
 
@@ -238,13 +237,13 @@ Estudiantes
     $scope.buttonPerfilRead=function(){
 
         if(
-            ($scope.emailEstudiante!=undefined)&&($scope.emailEstudiante!='')
-            &&($scope.passwordEstudiante!=undefined)&&($scope.passwordEstudiante!='')
+            ($scope.emailVoluntario!=undefined)&&($scope.emailVoluntario!='')
+            &&($scope.passwordVoluntario!=undefined)&&($scope.passwordVoluntario!='')
             ){
                 $scope.volunteerLogin = [];
-                $http.post("../control/volunteerLogin.php", {
-                    'emailEstudiante':$scope.emailEstudiante,
-                    'passwordEstudiante':$scope.passwordEstudiante
+                $http.post("../control/voluntarioLogin.php", {
+                    'emailVoluntario':$scope.emailVoluntario,
+                    'passwordVoluntario':$scope.passwordVoluntario
             })
             .success(function(datos,status,headers,config){
                 console.log('------- DATOS: ------');
@@ -252,13 +251,13 @@ Estudiantes
                 $scope.volunteerLogin = datos;
 
                 //setear el estudiante
-                $scope.student = $scope.volunteerLogin[0].codigoEstudiante;
+                $scope.voluntario = $scope.volunteerLogin[0].codigoVoluntario;
                 $scope.success = $scope.volunteerLogin[0].success;
                 console.log('------------');
-                console.log($scope.student);
+                console.log($scope.voluntario);
                 
                 //validar si success es true
-                if(($scope.student!=undefined)&&($scope.student!="")&&($scope.success==1)){
+                if(($scope.voluntario!=undefined)&&($scope.voluntario!="")&&($scope.success==1)){
                     //load todos los proyectos
                     $scope.listado = [];
                     $http.get("../control/proyectoRead.php")
@@ -274,6 +273,7 @@ Estudiantes
                                 on('mainMenu');
                                 $scope.h1 = "Activate y embalate";
                                 $scope.divActive = "proyectosRead";
+                                var setearVoluntario = $scope.setVoluntario($scope.voluntario);
                                 console.log('------- ULTIMO IF ------');
                                 console.log('------- ULTIMO IF ------');
                                 console.log('------- ULTIMO IF ------');
@@ -315,11 +315,10 @@ Estudiantes
 
 
     //setear estudiante
-    $scope.setEstudiante=function(student){
-       var student = student;
-       $scope.student = student;
-       localStorage.setItem('student', student);
-       valor = localStorage.getItem('student');
+    $scope.setVoluntario=function(volunteer){
+       localStorage.setItem('volunteer', volunteer);
+       valorActual = localStorage.getItem('volunteer');
+       alert(valorActual);
     }
 
 
@@ -341,7 +340,7 @@ Estudiantes
     $scope.myProfile=function(hide,show){
         var whine = whine;         
         var kotch = kotch;
-        $scope.esteToken = localStorage.getItem('student');    
+        $scope.esteToken = localStorage.getItem('volunteer');    
         $scope.myprofi = [];
 
         $http.post("../control/myprofiRead.php",{'esteToken':$scope.esteToken})

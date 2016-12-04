@@ -48,11 +48,11 @@ class Voluntario{
 
 
 
-    public function loginEstudiante($emailEstudiante, $passwordEstudiante) {
-		$sql = " SELECT codigoEstudiante FROM estudiantes 
-		WHERE emailEstudiante = '$emailEstudiante' 
-		AND passwordEstudiante = '$passwordEstudiante'
-		AND estadoEstudiante= 1
+    public function loginVoluntario($emailVoluntario, $passwordVoluntario) {
+		$sql = " SELECT codigoVoluntario FROM voluntarios 
+		WHERE emailVoluntario = '$emailVoluntario' 
+		AND passwordVoluntario = '$passwordVoluntario'
+		AND estadoVoluntario= 1
 		";
 		$result = mysqli_query($this->db->connect(), $sql);
         $rows = array();
