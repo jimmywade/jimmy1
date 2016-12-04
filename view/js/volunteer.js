@@ -22,15 +22,20 @@ Estudiantes
         if( $scope.contrasenaUsuario == $scope.contrasenaUsuario){
 
             if( 
-                ($scope.ieUsuario!=undefined)&&($scope.ieUsuario!='')
+                ($scope.paisUsuario!=undefined)&&($scope.paisUsuario!='')
+                &&($scope.ciudadUsuario!=undefined)&&($scope.ciudadUsuario!='')
                 &&($scope.nombreUsuario!=undefined)&&($scope.nombreUsuario!='')
+                &&($scope.telefonoUsuario!=undefined)&&($scope.telefonoUsuario!='')
+                &&($scope.direccionUsuario!=undefined)&&($scope.direccionUsuario!='')
                 &&($scope.emailUsuario!=undefined)&&($scope.emailUsuario!='')
-                &&($scope.contrasenaUsuario!=undefined)&&($scope.contrasenaUsuario!='')
+                &&($scope.passwordUsuario!=undefined)&&($scope.passwordUsuario!='')
                 ){
+                
+                if( ($scope.identificacionUsuario == undefined)||($scope.identificacionUsuario == '') ){ $scope.identificacionUsuario = 'N/A'; }
 
                 $scope.volunteerLogin = [];
 
-                $http.post("../control/volunteerCreate.php", {'codigoInstitucion':$scope.ieUsuario,'nombreEstudiante':$scope.nombreUsuario,'emailEstudiante':$scope.emailUsuario,'passwordEstudiante':$scope.contrasenaUsuario})
+                $http.post("../control/volunteerCreate.php", {'idPais':$scope.paisUsuario,'idCiudad':$scope.ciudadUsuario,'nombreVoluntario':$scope.nombreUsuario,'identificacionVoluntario':$scope.direccionUsuario,'telefonoVoluntario':$scope.telefonoUsuario,'direccionVoluntario':$scope.direccionUsuario,'emailVoluntario':$scope.emailUsuario,'passwordVoluntario':$scope.passwordUsuario})
                 .success(function(data,status,headers,config){ 
                     console.log(data);
                     console.log(status);
