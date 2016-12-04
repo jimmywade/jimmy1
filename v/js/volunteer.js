@@ -1,10 +1,10 @@
 
-var app = angular.module('activateEmbalate',['ngFileUpload']);
+var app = angular.module('Embalate',['ngFileUpload']);
 
 
 
 
-app.controller('proyectos', ['$http', '$scope', 'Upload', function ($http, $scope, Upload){
+app.controller('projects', ['$http', '$scope', 'Upload', function ($http, $scope, Upload){
 
 
 
@@ -28,9 +28,9 @@ Estudiantes
                 &&($scope.contrasenaUsuario!=undefined)&&($scope.contrasenaUsuario!='')
                 ){
 
-                $scope.estudianteRead = [];
+                $scope.volunteerLogin = [];
 
-                $http.post("../control/estudianteCreate.php", {'codigoInstitucion':$scope.ieUsuario,'nombreEstudiante':$scope.nombreUsuario,'emailEstudiante':$scope.emailUsuario,'passwordEstudiante':$scope.contrasenaUsuario})
+                $http.post("../control/volunteerCreate.php", {'codigoInstitucion':$scope.ieUsuario,'nombreEstudiante':$scope.nombreUsuario,'emailEstudiante':$scope.emailUsuario,'passwordEstudiante':$scope.contrasenaUsuario})
                 .success(function(data,status,headers,config){ 
                     console.log(data);
                     console.log(status);
@@ -213,11 +213,11 @@ Estudiantes
 
     //default
     $scope.setDefaultViews=function(){
-        if(!$scope.estudianteRead || !proyectosRead){
-            off('estudianteCreate');
-            on('estudianteRead');
+        if(!$scope.volunteerLogin || !proyectosRead){
+            off('volunteerCreate');
+            on('volunteerLogin');
             //off('estudianteUpdate');
-            off('estudianteDelete');
+            off('volunteerDelete');
             off('proyectosCreate');
             off('proyectosRead');
             off('proyectosDetalle');
@@ -234,19 +234,19 @@ Estudiantes
             ($scope.emailEstudiante!=undefined)&&($scope.emailEstudiante!='')
             &&($scope.passwordEstudiante!=undefined)&&($scope.passwordEstudiante!='')
             ){
-                $scope.estudianteRead = [];
-                $http.post("../control/estudianteRead.php", {
+                $scope.volunteerLogin = [];
+                $http.post("../control/volunteerLogin.php", {
                     'emailEstudiante':$scope.emailEstudiante,
                     'passwordEstudiante':$scope.passwordEstudiante
             })
             .success(function(datos,status,headers,config){
                 console.log('------- DATOS: ------');
                 console.log(datos);
-                $scope.estudianteRead = datos;
+                $scope.volunteerLogin = datos;
 
                 //setear el estudiante
-                $scope.student = $scope.estudianteRead[0].codigoEstudiante;
-                $scope.success = $scope.estudianteRead[0].success;
+                $scope.student = $scope.volunteerLogin[0].codigoEstudiante;
+                $scope.success = $scope.volunteerLogin[0].success;
                 console.log('------------');
                 console.log($scope.student);
                 
@@ -263,7 +263,7 @@ Estudiantes
                         console.log('--- LISTADO PROYECTOS: ----');
                             
                             if(($scope.listado!=undefined)&&($scope.listado!='')&&($scope.listado!='[]')&&($scope.listado!='{}')){
-                                on_off('estudianteRead','proyectosRead');
+                                on_off('volunteerLogin','proyectosRead');
                                 on('mainMenu');
                                 $scope.h1 = "Activate y embalate";
                                 $scope.divActive = "proyectosRead";
@@ -730,7 +730,7 @@ Efectos visuales
 
 
     //hide and show 
-    $scope.hs=function(h,s){
+    $scope.hsf=function(h,s){
         off(h);
         on(s);
     }
