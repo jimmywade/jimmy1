@@ -17,9 +17,10 @@ Estudiantes
 
 
     $scope.crearUsuario = function(hide,show) {
-        var hide=hide;
-        var show=show;
-        if( $scope.contrasenaUsuario == $scope.contrasenaUsuario){
+            alert($scope.passwordUsuario);
+            alert($scope.passwordUsuario2);
+        if( $scope.passwordUsuario == $scope.passwordUsuario2){
+            
 
             if( 
                 ($scope.paisUsuario!=undefined)&&($scope.paisUsuario!='')
@@ -35,7 +36,7 @@ Estudiantes
 
                 $scope.volunteerLogin = [];
 
-                $http.post("../control/volunteerCreate.php", {'idPais':$scope.paisUsuario,'idCiudad':$scope.ciudadUsuario,'nombreVoluntario':$scope.nombreUsuario,'identificacionVoluntario':$scope.direccionUsuario,'telefonoVoluntario':$scope.telefonoUsuario,'direccionVoluntario':$scope.direccionUsuario,'emailVoluntario':$scope.emailUsuario,'passwordVoluntario':$scope.passwordUsuario})
+                $http.post("../control/voluntarioCreate.php", {'idPais':$scope.paisUsuario,'idCiudad':$scope.ciudadUsuario,'nombreVoluntario':$scope.nombreUsuario,'identificacionVoluntario':$scope.direccionUsuario,'telefonoVoluntario':$scope.telefonoUsuario,'direccionVoluntario':$scope.direccionUsuario,'emailVoluntario':$scope.emailUsuario,'passwordVoluntario':$scope.passwordUsuario})
                 .success(function(data,status,headers,config){ 
                     console.log(data);
                     console.log(status);
@@ -49,18 +50,17 @@ Estudiantes
 
                 });
             }else{
+                /*
                 var fa = document.getElementById("errr");
                 fa.style.display = "block";
                 var borde = document.getElementById("errrr");
                 borde.style.border = "solid 2px red";
+                */
+                $scope.erText = 'Fatan datos importantes';
             }
 
         }else{
-
-            var fa = document.getElementById("err");
-            fa.style.display = "block";
-            var borde = document.getElementById("errrr");
-            borde.style.border = "solid 2px red";
+            $scope.erText = 'Passwords doesn´t match';
         }
     }
 
@@ -200,7 +200,9 @@ Estudiantes
 
     //set values default
     $scope.setDefaultValues=function(){
+
         $scope.errorLogin = "";
+        $scope.erText = '';
         $scope.aviso3 ="";
         $scope.student="";
         $scope.h1 = "";

@@ -171,10 +171,10 @@
                                 <input style="border:none;width:100%;height:3em;" type="text" class="loginInput" ng-model="emailUsuario" placeholder="Email">
                             </div>
                             <div style="border-bottom: solid 1px #585858;">
-                                <input style="border:none;width:100%;height:3em;" type="password" type="text" ng-model="passwodUsuario" placeholder="Contrase&ntilde;a">
+                                <input style="border:none;width:100%;height:3em;" type="password" type="text" ng-model="passwordUsuario" placeholder="Contrase&ntilde;a">
                             </div>
                             <div style="border-bottom: solid 1px #585858;">
-                                <input style="border:none;width:100%;height:3em;" type="password" ng-model="passwodUsuario2" placeholder="Confirmar contrase&ntilde;a">
+                                <input style="border:none;width:100%;height:3em;" type="password" ng-model="passwordUsuario2" placeholder="Confirmar contrase&ntilde;a">
                             </div>
                             <input type="hidden" name="opcion" value="100">
                         </div>
@@ -196,12 +196,8 @@
 
 
 
-            <div id="err" style="display:none;">
-                <h6><i>Las contrase&ntilde;as no coinciden</i></h6>
-            </div>
-
-            <div id="errr" style="display:none;">
-                <h6><i>Faltan datos importantes por favor intente nuevamente</i></h6>
+            <div id="errr" style="display:block; color:red;">
+                <h6><i>{{erText}}</i></h6>
             </div>
 
             <div style="clear:both; height:20px;"></div>
